@@ -1,0 +1,366 @@
+﻿<Window x:Class="Pen.Map.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Microsoft.MapPoint.Rendering3D;assembly=Microsoft.MapPoint.Rendering3D"
+        xmlns:t="clr-namespace:Telerik.Windows.Controls.RibbonBar.Primitives;assembly=Telerik.Windows.Controls.RibbonBar"       
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        xmlns:my1="clr-namespace:Microsoft.Windows.Controls.Primitives;assembly=WPFToolkit"
+        xmlns:my2="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:local="clr-namespace:Pen.Map"
+        Title="Pen Map" Height="890" Width="1345" Closing="Window_Closing" Name="windowMain" KeyDown="windowMain_KeyDown"  
+        Loaded="windowMain_Loaded"  Icon="/Pen.Map;component/Images/tool.png">
+    
+    <Window.Resources>
+
+        <!-- Style of ColorPicker -->
+        <Style TargetType="telerik:RadColorPicker" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=telerik:TransparentTheme, ElementType=telerik:RadColorPicker}}" />
+
+        <!-- Note: Labels and TextBoxes of the Lesson Content have English & Arabic Styles -->
+
+        <!-- Style of label of Lesson Name -->
+        <Style x:Key="LabelLessonNameStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Sakkal Majalla"/>
+            <Setter Property="FontSize" Value="24"/>            
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+
+        <!-- English Style of Title Label of the Lesson content -->
+        <Style x:Key="LabelTitleEnglishStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Segoe WP SemiLight"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Margin" Value="10,0,0,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <!-- Arabic Style of Title Label -->
+        <Style x:Key="LabelTitleArabicStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Traditional Arabic" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Margin" Value="10,0,0,5" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        
+        <!-- English Style of Date Label of the Lesson content -->
+        <Style x:Key="LabelDateEnglishStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Segoe WP"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FF0588C1"/>
+        </Style>
+        <!-- Arabic Style of Date Label -->
+        <Style x:Key="LabelDateArabicStyle" TargetType="Label">            
+            <Setter Property="FontFamily" Value="Traditional Arabic" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FF0588C1"/>            
+        </Style>
+
+        <!-- Default (Unfocused) Style of the Grid Holding Title and Date Labels -->
+        <Style x:Key="GridTitleStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,50,0,0"/>
+            <Setter Property="Width" Value="570"/>
+            <Setter Property="Background" Value="#130082B7"/>
+        </Style>
+        <!-- Used as a background color of the focused title -->
+        <LinearGradientBrush  x:Key="GridTitleFocusBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#130082B7" Offset="0.064" />
+            <GradientStop Color="#430082B7" Offset="1" />
+            <GradientStop Color="#B14B4B4B" Offset="0" />
+        </LinearGradientBrush>        
+
+        <!-- Enlgish Style of Paragraph TextBlock of the Lesson content -->
+        <Style x:Key="TextBlockParagraphEnglishStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe WP Light"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="540"/>
+            <Setter Property="Margin" Value="20,15,0,0"/>
+            <Setter Property="Foreground" Value="#FF6F6F6F"/>
+            <Setter Property="TextAlignment" Value="Justify"/>
+        </Style>
+        <!-- Arabic Style of Paragraph TextBox -->
+        <Style x:Key="TextBlockParagraphArabicStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Sakkal Majalla" />
+            <Setter Property="FontSize" Value="22" />            
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Width" Value="540"/>
+            <Setter Property="Margin" Value="20,15,0,0"/>
+            <Setter Property="Foreground" Value="#FF6F6F6F"/>
+            <Setter Property="TextAlignment" Value="Justify"/>
+        </Style>
+
+        <!-- English Style of ScrollViewer that holds the Lesson content -->
+        <Style x:Key="ScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="Green"/>
+                <!-- Unfocused Color -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                <!-- Selection Color  -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
+        </Style>
+        
+        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBoxItem}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="Green"/>
+                <!-- Unfocused Color -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                <!-- Selection Color  -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
+        </Style>
+
+        <!-- those styles rules the button
+        a button contains a stackPanel which contains 
+        1. a textBlock, represents button caption
+        2. an image,    represents button icon-->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>            
+        </Style>
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>
+        </Style>
+        <Style x:Key="IconButtonStyle" TargetType="{x:Type Image}">
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Margin" Value="5,0,5,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="TextButtonEnglishStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="TextButtonArabicStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="Sakkal Majalla"/>
+        </Style>
+        <Style x:Key="StackPanelButtonStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Height}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid Height="800" Width="1280" Name="gridMain">
+        <Canvas Name="canvasMain">
+            
+            <!-- Mediator that forwards the property changes -->
+            <local:ScrollViewerOffsetMediator x:Name="mediator"/>
+
+            <!-- Application Background Image -->
+            <Image Opacity="0.06" Name="imageBackground" Height="1280" Width="1280" Canvas.Top="-200" Source="/Pen.Map;component/Images/background.png"/>
+
+            <!-- ControlBox, controls in top right of the window  -->
+            <StackPanel Name="stackPanelControlBox" Orientation="Horizontal" Canvas.Left="1177" Canvas.Top="0" Opacity="0.6">
+                <Button Style="{StaticResource ButtonStyle}" Canvas.Left="1223" Canvas.Top="0" Name="buttonHelp" Width="50" >
+                    <Image Source="/Pen.Map;component/Images/help.png"></Image>
+                </Button>
+                <Button Canvas.Left="1173" Style="{StaticResource ButtonStyle}" Canvas.Top="0" Name="buttonClose" Width="50" TouchDown="buttonClose_TouchDown">
+                    <Image Source="/Pen.Map;component/Images/off.png" />
+                </Button>
+            </StackPanel>
+            <!-- Controls in top left of the window (logo, captionText, time) -->
+            <StackPanel  Name="stackPanelCaption" Orientation="Horizontal">
+                <Image Canvas.Left="0" Canvas.Top="6" Height="40" Name="imageLogo" Width="75" Source="/Pen.Map;component/Images/logo1.png" Stretch="None" />
+                <TextBlock Name="textCaption" Text="Pen Map | " VerticalAlignment="Center" Foreground="#FF878787" FontSize="18" FontFamily="Segoe WP Light" />
+            </StackPanel>
+
+            <!-- Grid of the map + it's shadow + illustrations-over-map inkCanvasMap -->
+            <Grid Canvas.Left="660" Canvas.Top="50" Height="635" Name="gridMap" Width="600">
+                <t:DropShadow Name="dropShadow1" ShadowColor="#8E000000" />
+                <WindowsFormsHost Name="controlHost" Margin="2">
+                    <WindowsFormsHost.Child>
+                        <m:GlobeControl />
+                    </WindowsFormsHost.Child>
+                </WindowsFormsHost>
+            </Grid>
+            <!-- inkCanvasMap for drawing illustrations -->
+            <InkCanvas Name="inkCanvasMap" Margin="2" Canvas.Left="660" Canvas.Top="50" Height="631" Width="596" TouchLeave="inkCanvasMap_TouchUp_TouchLeave" TouchMove="inkCanvasMap_TouchMove" TouchUp="inkCanvasMap_TouchUp_TouchLeave" TouchDown="inkCanvasMap_TouchDown">
+                <InkCanvas.Background>
+                    <SolidColorBrush />
+                </InkCanvas.Background>
+            </InkCanvas>
+            <!-- Pen -->
+            <Button Name="button1" Style="{StaticResource ButtonStyle}" Canvas.Left="652" Canvas.Top="700" Width="107" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/pen.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Pen" Name="textBlockButton1" />
+                </StackPanel>
+            </Button>            
+            <!-- Eraser -->
+            <Button Name="button2" Style="{StaticResource ButtonStyle}" Canvas.Left="652" Canvas.Top="743" Width="107" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/clean.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Eraser" Name="textBlockButton2" />
+                </StackPanel>
+            </Button>
+            <!-- Hand -->
+            <Button Name="button3" Style="{StaticResource ButtonStyle}" Canvas.Left="765" Canvas.Top="700" Width="107" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/hand.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Hand" Name="textBlockButton3" />
+                </StackPanel>
+            </Button>
+            <!-- Marker -->
+            <Button Name="button4" Style="{StaticResource ButtonStyle}" Canvas.Left="765" Canvas.Top="743" Width="107" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/marker.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Marker" Name="textBlockButton4" />
+                </StackPanel>
+            </Button>
+            <!-- Facebook -->
+            <Button Name="button5" Style="{StaticResource ButtonStyle}" Canvas.Left="1160" Canvas.Top="743" Width="100" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/share.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Share" Name="textBlockButton5" />
+                </StackPanel>
+            </Button>
+            <!-- Show, hide navigation control -->
+            <Button Name="button6" Style="{StaticResource ButtonStyle}" Canvas.Left="885" Canvas.Top="700" Width="116" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/control.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Controls" Name="textBlockButton6" />
+                </StackPanel>
+            </Button>
+            <!-- Show, hide navigation control -->
+            <Button Name="button7" Style="{StaticResource ButtonStyle}" Canvas.Left="885" Canvas.Top="743" Width="116" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/pushpin.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Pushpin" Name="textBlockButton7" />
+                </StackPanel>
+            </Button>
+            <!-- Change Language -->
+            <Button Name="button8" Style="{StaticResource ButtonStyle}" Canvas.Left="1210" Canvas.Top="700" Width="47" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/language.png" />
+                </StackPanel>
+            </Button>
+            <!-- Color Picker -->           
+            <telerik:RadColorPicker Canvas.Left="1173" Canvas.Top="709" Name="radColorPicker1" SelectedColor="#FF00B4FF" TouchDown="radColorPicker1_TouchDown" SelectedColorChanged="radColorPicker1_SelectedColorChanged" />
+            <!-- Listbox of the lesson content (titles and parapgraphs) -->
+            <Label Canvas.Left="20" Canvas.Top="46" Content="Lesson 2: Heksos" Name="labelLesson" FontSize="24" />
+
+            <!-- Content of the Lesson, the left side of the Window -->
+            <!-- ItemContainerStyle="{StaticResource ListBoxStyle}" -->
+            <ScrollViewer Canvas.Left="20" Canvas.Top="95" VerticalScrollBarVisibility="Hidden" Height="600" Name="scrollViewerContent">
+                <InkCanvas Name="inkCanvasContent" EditingMode="None">
+                    <!-- Add 350 pixcel as empty space at the end of stackPanel
+                    in order to : 1. Give emty space for teacher to do more illustration
+                                  2. Give the chanse for the last Title of the Lesson to be 
+                                  scrolled up to the top scrollViewer -->
+                    <StackPanel Name="stackPanelContent" Margin="0,0,0,350">
+
+                        <Grid Name="gridT1" Style="{StaticResource GridTitleStyle}" Margin="0">                            
+                            <Label Name="labelT1" Style="{StaticResource LabelTitleEnglishStyle}" Content="1. Attack of Heksos"/>
+                            <Label Name="labelD1" Style="{StaticResource LabelDateEnglishStyle}" Content="4000 PC"/>
+                        </Grid>
+                        <TextBlock Name="textBlockP11" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he was palying football, he found himself playing football. Thatis when the rain falls. This made him wet. This made them laugh."/>
+                        <TextBlock Name="textBlockP12" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he first played footaball will his friends, hi scored a fanastic goal in the corner of the net."/>
+                        <TextBlock Name="textBlockP13" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  Consequently, this was very helpful for both of the students and their teacher who thought of travelling to the United States of America to achieve his all of his dreaming and hopes. bla bla bla bla bla ........."/>
+
+                        <Grid Name="gridT2" Style="{StaticResource GridTitleStyle}">
+                            <Label Name="labelT2" Style="{StaticResource LabelTitleEnglishStyle}" Content="2. Royal Defense"/>
+                            <Label Name="labelD2" Style="{StaticResource LabelDateEnglishStyle}" Content="3890 PC"/>
+                        </Grid>
+                        <TextBlock Name="textBlockP21" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he was palying football, he found himself playing football. Thatis when the rain falls. This made him wet. This made them laugh."/>
+                        <TextBlock Name="textBlockP22" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he first played footaball will his friends, hi scored a fanastic goal in the corner of the net."/>
+                        <TextBlock Name="textBlockP23" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  Consequently, this was very helpful for both of the students and their teacher who thought of travelling to the United States of America to achieve his all of his dreaming and hopes. bla bla bla bla bla ........."/>
+
+                        <Grid Name="gridT3" Style="{StaticResource GridTitleStyle}">
+                            <Label Name="labelT3" Style="{StaticResource LabelTitleEnglishStyle}" Content="3. Forming The Army"/>
+                            <Label Name="labelD3" Style="{StaticResource LabelDateEnglishStyle}" Content="3750 PC"/>
+                        </Grid>
+                        <TextBlock Name="textBlockP31" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he was palying football, he found himself playing football. Thatis when the rain falls. This made him wet. This made them laugh."/>
+                        <TextBlock Name="textBlockP32" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he first played footaball will his friends, hi scored a fanastic goal in the corner of the net."/>
+                        <TextBlock Name="textBlockP33" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  Consequently, this was very helpful for both of the students and their teacher who thought of travelling to the United States of America to achieve his all of his dreaming and hopes. bla bla bla bla bla ........."/>
+
+                        <Grid Name="gridT4" Style="{StaticResource GridTitleStyle}">
+                            <Label Name="labelT4" Style="{StaticResource LabelTitleEnglishStyle}" Content="4. Ahmos Concured Heksos"/>
+                            <Label Name="labelD4" Style="{StaticResource LabelDateEnglishStyle}" Content="3710 PC" />
+                        </Grid>
+                        <TextBlock Name="textBlockP41" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he was palying football, he found himself playing football. Thatis when the rain falls. This made him wet. This made them laugh."/>
+                        <TextBlock Name="textBlockP42" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  When he first played footaball will his friends, hi scored a fanastic goal in the corner of the net."/>
+                        <TextBlock Name="textBlockP43" Style="{StaticResource TextBlockParagraphEnglishStyle}" Text="  Consequently, this was very helpful for both of the students and their teacher who thought of travelling to the United States of America to achieve his all of his dreaming and hopes. bla bla bla bla bla ........."/>
+
+                    </StackPanel>
+                </InkCanvas>
+            </ScrollViewer>
+            <!-- Buttons uder the Lesson Content  -->
+            <!-- Take Ink Notes on the Lesson Content -->
+            <ToggleButton Name="toggleButton1" Width="50"  Canvas.Left="20" Canvas.Top="750" Style="{StaticResource ToggleButtonStyle}" Click="toggleButton_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}" Height="Auto">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/pen.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </ToggleButton>
+            <!-- Take marks with a marker on the Lesson Content -->
+            <ToggleButton Name="toggleButton2" Width="50" Canvas.Left="74" Canvas.Top="750" Style="{StaticResource ToggleButtonStyle}" Click="toggleButton_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/marker.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </ToggleButton>
+            <!-- Erase notes and marks Lesson Content -->
+            <ToggleButton Name="toggleButton3" Width="50" Canvas.Left="128" Canvas.Top="750" Style="{StaticResource ToggleButtonStyle}" Click="toggleButton_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/eraser.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </ToggleButton>
+            <!-- Switch to scoll mode to be able to scroll Lesson Content -->
+            <ToggleButton Name="toggleButton4" Width="50" Canvas.Left="183" Canvas.Top="750" Style="{StaticResource ToggleButtonStyle}" Click="toggleButton_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/scroll.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </ToggleButton>
+            <!-- Open Lesson Files (MS Access Files) -->
+            <Button Name="button9" Width="96" Canvas.Left="497" Canvas.Top="750" Style="{StaticResource ButtonStyle}" Click="tool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Map;component/Images/open.png" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" Text="Open" Name="textBlockButton9" />
+                </StackPanel>
+            </Button>
+            <!-- Scroll one-title up  -->
+            <Button Name="button10" Style="{StaticResource ButtonStyle}" Width="50" Canvas.Left="444" Canvas.Top="710" Click="buttonScroll_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Source="/Pen.Map;component/Images/up.png" Style="{StaticResource IconButtonStyle}" Margin="5,0" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </Button>
+            <!-- Scroll one-title down  -->
+            <Button Name="button11" Style="{StaticResource ButtonStyle}" Width="50" Canvas.Left="444" Canvas.Top="750" Click="buttonScroll_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Source="/Pen.Map;component/Images/down.png" Style="{StaticResource IconButtonStyle}" />
+                    <TextBlock Style="{StaticResource TextButtonEnglishStyle}" />
+                </StackPanel>
+            </Button>
+            <telerik:RadColorPicker Canvas.Left="506" Canvas.Top="718" Name="radColorPicker2" SelectedColor="#FF00B4FF" SelectedColorChanged="radColorPicker2_SelectedColorChanged" />
+            
+            <Button Content="Button" Height="34" Name="button" Width="82" Click="button_Click" 
+                    Canvas.Left="262" Canvas.Top="716" Visibility="Hidden">
+                <!--<Button.Effect>
+                    <DropShadowEffect BlurRadius="15" Color="Black" Opacity="1" ShadowDepth="0" />
+                </Button.Effect>-->
+            </Button>
+        </Canvas>
+    </Grid>
+</Window>

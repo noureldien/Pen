@@ -1,0 +1,13 @@
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\bin\Debug\WpfGlassWithExtendedWindowFrame.exe
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\bin\Debug\WpfGlassWithExtendedWindowFrame.pdb
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\Window1.baml
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\Window1.g.cs
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\App.g.cs
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\WpfGlassWithExtendedWindowFrame_MarkupCompile.cache
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\WpfGlassWithExtendedWindowFrame.g.resources
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\WpfGlassWithExtendedWindowFrame.Properties.Resources.resources
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\WpfGlassWithExtendedWindowFrame.exe
+C:\Users\Nour El-Dien\Desktop\Glassy windows and controls WPF\WpfGlassWithExtendedWindowFrame\WpfGlassWithExtendedWindowFrame\obj\Debug\WpfGlassWithExtendedWindowFrame.pdb

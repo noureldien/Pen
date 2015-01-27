@@ -1,0 +1,10 @@
+﻿<Window x:Class="Pen.Tools.WebfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WebfileWindow" Height="494" Width="576" xmlns:my="clr-namespace:Pen.Tools">
+    <Grid>
+        <Grid Name="grid1">
+            <my:WebfilePanel Height="300" HorizontalAlignment="Left" Margin="27,36,0,0" x:Name="webfilePanel1" VerticalAlignment="Top" Width="500" />
+        </Grid>
+    </Grid>
+</Window>

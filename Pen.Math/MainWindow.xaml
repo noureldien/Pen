@@ -1,0 +1,364 @@
+﻿<Window x:Class="Pen.Math.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"  
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"        
+        xmlns:local="clr-namespace:Pen.Math"        
+        xmlns:my="clr-namespace:Telerik.Windows.Controls.RibbonBar.Primitives;assembly=Telerik.Windows.Controls.RibbonBar" 
+        xmlns:my1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        xmlns:my2="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" 
+        xmlns:my3="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" 
+        xmlns:my4="clr-namespace:Microsoft.Expression.Framework.Controls;assembly=Microsoft.Expression.Prototyping.Runtime"
+        xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"               
+        Title="Pen Mathematics" KeyUp="MainWindow_KeyUp" Loaded="MainWindow_Loaded"
+        Height="890" Width="1348" WindowStartupLocation="CenterScreen" 
+        Closing="Window_Closing" Name="windowMain" IsManipulationEnabled="False" Icon="/Pen.Math;component/Images/logo1.png">
+    
+    <Window.Resources>
+        
+        <Storyboard x:Key="StoryBoardWindowDim">            
+        </Storyboard>
+        
+        <!-- Style (theme) of Rad color picker -->
+        <Style TargetType="telerik:RadColorPicker" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=telerik:TransparentTheme, ElementType=telerik:RadColorPicker}}" />        
+        <!-- Styles of button content -->
+        <Style x:Key="IconButton" TargetType="{x:Type Image}">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="TextButton" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>        
+        <Style x:Key="StackPanelButton" TargetType="{x:Type StackPanel}">
+            <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type telerik:RadButton}}, Path=Height}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>        
+        <!-- Style of Temporary canvas that is used in assigning an equation task -->
+        <Style x:Key="inkCanvasTempStyle" TargetType="InkCanvas">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="0"/>
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="Canvas.Left" Value="0"/>
+            <Setter Property="Canvas.Top" Value="0"/>
+            <Setter Property="EditingMode" Value="None"/>
+        </Style>
+        <!-- Style of Grid carrying inkCanvas of students -->
+        <Style x:Key="GridInkCanvas" TargetType="{x:Type Grid}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFEFDE1" Offset="0" />
+                        <GradientStop Color="#FFFCF2B1" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style of scrollbar of scrollviewer carrying the inkCanvas of the students -->
+        <Style x:Key="ScrollBar" TargetType="{x:Type ScrollBar}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Opacity" Value="0.4" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- Style of scrollbar carrying the inkCanvas of the students -->
+        <Style x:Key="ScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ScrollContentPresenter Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                            <ScrollBar
+                        Style="{StaticResource ScrollBar}"
+                        Name="PART_VerticalScrollBar"
+                        Grid.Column="1"
+                        Value="{TemplateBinding VerticalOffset}"
+                        Maximum="{TemplateBinding ScrollableHeight}"
+                        ViewportSize="{TemplateBinding ViewportHeight}"
+                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                            <ScrollBar 
+                        Style="{StaticResource ScrollBar}"
+                        Name="PART_HorizontalScrollBar"
+                        Orientation="Horizontal"
+                        Grid.Row="1"
+                        Value="{TemplateBinding HorizontalOffset}"
+                        Maximum="{TemplateBinding ScrollableWidth}"
+                        ViewportSize="{TemplateBinding ViewportWidth}"
+                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Style of grid acts as pages inside the inkCanvas of the students -->
+        <Style x:Key="GridPageStyle" TargetType="Grid">            
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Margin" Value="20,5,20,0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" Color="Gray" Opacity="0.6" ShadowDepth="0" />
+                </Setter.Value>
+            </Setter>            
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFEFDE1" Offset="0" />
+                        <GradientStop Color="#FFFCF2B1" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>        
+        <!-- Style of Border carrying Controls of Algebra and Geometry Modes -->
+        <Style x:Key="BorderPanelStyle" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Transparent" Offset="0" />
+                        <GradientStop Color="#2DFFD600" Offset="0.471" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#8EA02800"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="BorderThickness" Value="0.3"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Canvas.Top" Value="705"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Name="gridMain" Height="800" Width="1280">
+
+        <Grid.Resources>            
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>                    
+                    <ResourceDictionary Source="Themes\ToggleButton.xaml"/>
+                    <ResourceDictionary Source="Themes\Button.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Canvas Name="canvasMain">
+            <TextBlock Canvas.Left="608" Canvas.Top="702" Height="85" Name="textBlock1" Text="W" Width="60" FontSize="60" FontFamily="Century Gothic" Opacity="0.4" IsHitTestVisible="False">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFFD242" Offset="0" />
+                        <GradientStop Color="#FFFF4200" Offset="1" />
+                    </LinearGradientBrush>
+                </TextBlock.Foreground></TextBlock>
+            <InkCanvas Canvas.Left="533" Canvas.Top="685" Height="115" Name="inkCanvasCommand" Width="223" StrokeCollected="inkCanvasCommand_StrokeCollected">
+                <InkCanvas.Background>
+                    <SolidColorBrush />
+                </InkCanvas.Background>
+            </InkCanvas>
+            <!-- Mediator that forwards the property changes -->
+            <!--ScrollViewer="{Binding ElementName=scrollViewer1}"-->
+            <local:ScrollViewerOffsetMediator x:Name="Mediator"/>
+
+            <!-- ControlBox, controls in top right of the window  -->
+            <StackPanel Name="stackPanelControlBox" Orientation="Horizontal" Canvas.Left="1177" Canvas.Top="0" Opacity="0.6">
+                <Button Style="{StaticResource ButtonStyle}" Canvas.Left="1223" Canvas.Top="0" Name="buttonHelp" Width="50" >
+                    <Image Source="/Pen.Math;component/Images/help.png"></Image>
+                </Button>
+                <Button Canvas.Left="1173" Style="{StaticResource ButtonStyle}" Canvas.Top="0" Name="buttonClose" Width="50" TouchDown="buttonClose_TouchDown">
+                    <Image Source="/Pen.Math;component/Images/off.png" />
+                </Button>
+            </StackPanel>
+            <!-- Controls in top left of the window (logo, captionText, time) -->
+            <StackPanel  Name="stackPanelCaption" Orientation="Horizontal">
+                <Image Canvas.Left="0" Canvas.Top="6" Height="40" Name="imageLogo" Width="75" Source="/Pen.Math;component/Images/logo1.png" Stretch="None" />
+                <TextBlock Name="textCaption" Text="Pen Math | " VerticalAlignment="Center" Foreground="#FF878787" FontSize="18" FontFamily="Segoe WP Light" />
+            </StackPanel>
+
+            <!--Teacher InkCanvas3-->
+            <local:InkCanvas_ Canvas.Left="0" Height="658" x:Name="inkCanvas3" Width="834" EditingMode="None" 
+                              TouchLeave="inkCanvas_TouchUp_TouchLeave" TouchMove="inkCanvas_TouchMove" 
+                              TouchUp="inkCanvas_TouchUp_TouchLeave" TouchDown="inkCanvas_TouchDown" 
+                              SelectionChanged="inkCanvasSource_SelectionChanged" 
+                              StrokeCollected="inkCanvasCommand_StrokeCollected" 
+                              Background="White" Canvas.Top="47" />
+
+            <!-- Student 1 Controls: InkCanvas1 + Buttons to control inkCanvas1 -->
+            <Canvas Canvas.Left="0" Canvas.Top="200" Height="600" Name="canvasStudent1" Width="425">
+                <InkCanvas Name="scrollBar1" Canvas.Left="120" Canvas.Top="516" Height="84" Width="300" EditingMode="GestureOnly" Gesture="InkCanvas_Gesture"/>
+                <ScrollViewer Name="scrollViewer1" HorizontalScrollBarVisibility="Hidden" Height="510" Width="425" VerticalScrollBarVisibility="Hidden" Canvas.Top="0" Canvas.Left="0">
+                    <InkCanvas Name="inkCanvas1" Height="510" TouchDown="inkCanvas_TouchDown" TouchLeave="inkCanvas_TouchUp_TouchLeave" TouchMove="inkCanvas_TouchMove" TouchUp="inkCanvas_TouchUp_TouchLeave" EditingMode="None" Width="1760" AllowDrop="True">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <local:Grid_ x:Name="gridPage1" Height="500" Style="{StaticResource GridPageStyle}">
+                                <Label  Name="labelPage1" Content="1" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                            </local:Grid_>
+                            <local:Grid_ x:Name="gridPage2" Height="500"  Style="{StaticResource GridPageStyle}">
+                                <Label  Name="labelPage2" Content="2" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                            </local:Grid_>
+                            <local:Grid_ x:Name="gridPage3" Height="500" Style="{StaticResource GridPageStyle}">
+                                <Label  Name="labelPage3" Content="3" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                            </local:Grid_>
+                            <local:Grid_ x:Name="gridPage4"  Height="500" Style="{StaticResource GridPageStyle}">
+                                <Label  Name="labelPage4" Content="4" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                            </local:Grid_>
+                        </StackPanel>
+                    </InkCanvas>
+                </ScrollViewer>
+                <!-- Pen toggleButton of student 1 -->
+                <ToggleButton Name="buttonPen1" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="20" Canvas.Top="520" Width="47" TouchUp="penButton_TouchUp">
+                    <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/pen.png"/>
+                </ToggleButton>
+                <!-- Eraser toggleButton of student 2 -->
+                <ToggleButton Name="buttonEraser1" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="70" Canvas.Top="520" Width="47" TouchUp="eraserButton_TouchUp">
+                    <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/eraser.png"/>
+                </ToggleButton>
+                <telerik:RadColorPicker Canvas.Left="26" Canvas.Top="563" Name="radColorPicker1" AutomaticColor="#FFFF6400" SelectedColor="#FFFF6400" SelectedColorChanged="radColorPicker_SelectedColorChanged" />
+            </Canvas>
+
+            <!-- Student 2 Controls: InkCanvas2 + Buttons to control inkCanvas2 -->
+            <InkCanvas Name="scrollBar2" Canvas.Left="860" Canvas.Top="716" Height="84" Width="300" EditingMode="GestureOnly" Gesture="InkCanvas_Gesture"/>
+            <ScrollViewer Name="scrollViewer2" HorizontalScrollBarVisibility="Hidden" Height="510" Canvas.Left="840" Canvas.Top="200" Width="425" VerticalScrollBarVisibility="Hidden">
+                <InkCanvas Name="inkCanvas2" Height="510" TouchDown="inkCanvas_TouchDown" TouchLeave="inkCanvas_TouchUp_TouchLeave" TouchMove="inkCanvas_TouchMove" TouchUp="inkCanvas_TouchUp_TouchLeave" EditingMode="None" Width="1760" AllowDrop="True">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <local:Grid_ x:Name="gridPage5" Height="500" Style="{StaticResource GridPageStyle}">                            
+                            <Label  Name="labelPage5" Content="1" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                        </local:Grid_>
+                        <local:Grid_ x:Name="gridPage6" Height="500"  Style="{StaticResource GridPageStyle}">
+                            <Label  Name="labelPage6" Content="2" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                        </local:Grid_>
+                        <local:Grid_ x:Name="gridPage7" Height="500" Style="{StaticResource GridPageStyle}">                           
+                            <Label  Name="labelPage7" Content="3" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                        </local:Grid_>
+                        <local:Grid_ x:Name="gridPage8"  Height="500" Style="{StaticResource GridPageStyle}">
+                            <Label  Name="labelPage8" Content="4" FontSize="24" Margin="359,0,17,9" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Foreground="#FFFF2200" />
+                        </local:Grid_>
+                    </StackPanel>
+                </InkCanvas>
+            </ScrollViewer>
+            <!-- Pen toggleButton of student 2 -->
+            <ToggleButton Name="buttonPen2" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="1214" Canvas.Top="720" Width="47" TouchUp="penButton_TouchUp">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/pen.png"/>
+            </ToggleButton>
+            <!-- Eraser toggleButton of student 2 -->
+            <ToggleButton Name="buttonEraser2" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="1164" Canvas.Top="720" Width="47" TouchUp="eraserButton_TouchUp">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/eraser.png"/>
+            </ToggleButton>            
+            <telerik:RadColorPicker Canvas.Left="1226" Canvas.Top="763" Name="radColorPicker2" AutomaticColor="#FFFF6400" SelectedColor="#FFFF6400" SelectedColorChanged="radColorPicker_SelectedColorChanged" />
+
+            <!-- Teacher Buttons to control inkCanvas3 + Buttons for Teacher Tasks (like open facebook, math panel, office word) -->
+            <!-- Pen toggleButton of Teacher -->
+            <ToggleButton Name="buttonPen3" Style="{StaticResource ToggleButtonStyle}"  Canvas.Left="810" Canvas.Top="712" Width="47" TouchUp="penButton_TouchUp">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/pen.png"/>
+            </ToggleButton>
+            <!-- Eraser toggleButton of Teacher -->
+            <ToggleButton Name="buttonEraser3" Style="{StaticResource ToggleButtonStyle}"  Canvas.Left="810" Canvas.Top="756" Width="47" TouchUp="eraserButton_TouchUp">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/eraser.png"/>
+            </ToggleButton>
+            <!-- Select toggleButton of Teacher -->
+            <ToggleButton Name="buttonSelect" Style="{StaticResource ToggleButtonStyle}"  Canvas.Left="760" Canvas.Top="712" Width="47" TouchUp="selectButton_TouchUp">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/select.png"/>
+            </ToggleButton>
+            <telerik:RadColorPicker Canvas.Left="767" Canvas.Top="761" Name="radColorPicker3" SelectedColorChanged="radColorPicker_SelectedColorChanged" />
+           
+            <!-- Temporary inkCanvas that is used in selecting equation and assign it as a task -->
+            <!--TouchDown="inkCanvasTemp_TouchDown" TouchMove="inkCanvasTemp_TouchMove" TouchUp="inkCanvasTemp_TouchUp"-->
+            <InkCanvas Name="inkCanvasTemp" Style="{StaticResource inkCanvasTempStyle}" />
+            
+            <!-- Modes' button of the apllication -->
+            <!-- Expander Button, used to expand the student1 panel or hide it -->
+            <ToggleButton Name="buttonExpander" Width="32" Canvas.Left="-1" Canvas.Top="152" Click="buttonExpander_Click" Style="{StaticResource ToggleButtonStyle}" Height="30">
+                <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/left.png" Height="16" Width="16" Name="imageButtonExpander" />
+            </ToggleButton>
+            <!-- Application Mode button: Algebra -->
+            <ToggleButton Canvas.Left="-1" Canvas.Top="112" Name="buttonGeometryMode" Style="{StaticResource ToggleButtonStyle}" Width="32" Height="32" Click="buttonApplicationMode_Click">
+                    <Image Source="/Pen.Math;component/Images/G2.png" Width="16" Height="16" Style="{StaticResource IconButton}" Name="imageButtonGeometry" />
+            </ToggleButton>            
+            <!-- Application Mode button: Geometry -->
+            <ToggleButton Canvas.Left="-1" Canvas.Top="71" Name="buttonAlgebraMode" Style="{StaticResource ToggleButtonStyle}" Width="32" Height="32" Click="buttonApplicationMode_Click">
+                    <Image Source="/Pen.Math;component/Images/A1.png" Width="16" Height="16" Style="{StaticResource IconButton}" Name="imageButtonAlgebra" />                
+            </ToggleButton>
+
+            <!-- Buttons of Algebra Mode -->
+            <Border  Name="borderAlgebraPanel" Width="57" Canvas.Left="425" Style="{StaticResource BorderPanelStyle}">
+                <Canvas>                   
+                    <!-- Math pnale button -->
+                    <Button Style="{StaticResource ButtonStyle}" Canvas.Top="5" Canvas.Left="5" Name="buttonMathPanel" TouchDown="buttonMathPanel_TouchDown" Width="47">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/equation.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Equation Graph using MS Word -->
+                    <Button Style="{StaticResource ButtonStyle}" Canvas.Top="47" Canvas.Left="5" Name="buttonGraph" TouchDown="buttonGraph_TouchDown" Width="47">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/graph.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+                </Canvas>
+            </Border>
+            <!-- Buttons of Geometry Mode -->
+            <Border Name="borderGeometryPanel" Width="247" Canvas.Left="15" Style="{StaticResource BorderPanelStyle}" Canvas.Top="810">
+                <Canvas>
+                    <!-- Draw line -->
+                    <Button Name="buttonLine" Canvas.Top="5" Canvas.Left="5" Width="47" Style="{StaticResource ButtonStyle}" Click="buttonShape_Click">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/line.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Draw rectangle -->
+                    <Button Name="buttonRectangle" Canvas.Top="52" Canvas.Left="5" Width="47" Style="{StaticResource ButtonStyle}" Click="buttonShape_Click">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/rectangle.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Draw trianlge -->
+                    <Button Name="buttonTriangle" Canvas.Top="5" Canvas.Left="55" Width="47" Style="{StaticResource ButtonStyle}" Click="buttonShape_Click">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/triangle.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Draw circle -->
+                    <Button Name="buttonCircle" Canvas.Top="52" Canvas.Left="55" Width="47" Style="{StaticResource ButtonStyle}" Click="buttonShape_Click">
+                        <StackPanel Style="{StaticResource StackPanelButton}">
+                            <Image Style="{StaticResource IconButton}" Source="/Pen.Math;component/Images/circle.png" />
+                            <TextBlock Style="{StaticResource TextButton}" />
+                        </StackPanel>
+                    </Button>
+
+                </Canvas>
+            </Border>
+            
+
+            <!-- ................................................................... -->
+            
+            <Button Background="White" Canvas.Left="1145" Canvas.Top="112" Content="Button" Height="28" Name="button9" Width="98" Visibility="Hidden">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" Color="Gray" Opacity="0.6" ShadowDepth="0" />
+                </Button.Effect>
+            </Button>
+            <Button Canvas.Left="1147" Canvas.Top="76" Height="29" Name="button6" Width="114" Content="Button 6" TouchDown="button6_TouchDown" Visibility="Hidden"/>
+            <!--Style="{StaticResource InkButton}"
+            Width="{Binding ElementName=inkCanvas1, Path=Height}" --> 
+            <!--Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"-->
+        </Canvas>
+    </Grid>    
+</Window>
+        
+   

@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Pen.Tools.WebfilePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Name="webfilePanel" Height="370" Width="500">
+    
+    <UserControl.Resources>
+        
+        <!-- Style of image of Lesson File Icon -->
+        <Style x:Key="ImageGreenStyle" TargetType="Image">
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Canvas.Top" Value="14"/>
+            <Setter Property="Source" Value="/Pen.Tools;component/Images/plf.png"/>
+        </Style>
+        <!-- Style of image of Lesson File Icon -->
+        <Style x:Key="ImageBlueStyle" TargetType="Image">
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Canvas.Top" Value="14"/>
+            <Setter Property="Source" Value="/Pen.Tools;component/Images/pmf.png"/>            
+        </Style>
+        <!-- Style of label of Lesson File Title  -->
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="MaxWidth" Value="310"/>
+            <Setter Property="Canvas.Top" Value="9"/>
+            <Setter Property="Canvas.Left" Value="75"/>            
+            <Setter Property="FontFamily" Value="Melor"/>
+            <Setter Property="FontSize" Value="28"/>
+        </Style>
+        <!-- Style of textBlock of Lesson File Description  -->
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="MaxWidth" Value="310"/>
+            <Setter Property="Canvas.Top" Value="52"/>
+            <Setter Property="Canvas.Left" Value="80"/>
+            <Setter Property="Foreground" Value="#FFA0A0A0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12.4"/>
+        </Style>
+        <!-- Style of label of Lesson File Date  -->
+        <Style x:Key="LabelDateStyle" TargetType="Label">
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Canvas.Top" Value="16"/>
+            <Setter Property="Canvas.Left" Value="412"/>            
+            <Setter Property="FontFamily" Value="Melor"/>
+            <Setter Property="FontSize" Value="16"/>           
+        </Style>
+        <!-- Style of canvas of Lesson File Item -->
+        <Style x:Key="CanvasStyle" TargetType="Canvas">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="500"/>
+        </Style>
+
+        <!-- This green color is required to have multible colored lesson file items #FFF0FAEB #1450BE00 -->
+        <SolidColorBrush x:Key="GreenColor" Color="#FFF0FAEB"/>
+        <!-- This blue color is required to have multible colored lesson file items ##FFF0F5FF #180042FF #130082B7 -->
+        <SolidColorBrush x:Key="BlueColor" Color="#FFF0F5FF"/>
+        <!-- Green color of the border of this control -->
+        <LinearGradientBrush x:Key="BorderGreenColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#3CB4DC82" Offset="0" />
+            <GradientStop Color="White" Offset="0.0946" />
+            <GradientStop Color="White" Offset="0.9054" />
+            <GradientStop Color="#3CB4DC82" Offset="1" />
+        </LinearGradientBrush>
+        <!-- Blue color of the border of this control -->
+        <!-- #C8DCF0D2 #C8DCF0C3 #3CB4DC82 -->
+        <LinearGradientBrush x:Key="BorderBlueColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#6BBED1FF" Offset="0" />
+            <GradientStop Color="White" Offset="0.0946" />
+            <GradientStop Color="White" Offset="0.9054" />
+            <GradientStop Color="#6BBED1FF" Offset="1" />
+        </LinearGradientBrush>       
+
+    </UserControl.Resources>
+    
+    <Grid Name="gridMain">        
+        <Grid.Resources>
+            <!-- Vista Button Style -->            
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>                   
+                    <ResourceDictionary Source="Themes\Button.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Canvas Name="canvasMain">
+            <Border Name="borderPopup" CornerRadius="6" BorderThickness="1" BorderBrush="#6F207645" Height="370" Width="500">
+                <ScrollViewer Name="scrollViewer" Height="300" Width="500" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Name="stackPanel">
+                        <!-- ### User inteface description ###
+                        The stack panel is holding items, very item represents a lesson file that the user
+                        can download. Every Item has four main elements (controls) that are wrapped by 
+                        a canvas. These four items are:
+                        1. Image: shows the logo of the lesson file
+                        2. Label: shows the title of the lesson file
+                        3. TextBlock: shows the description of the lesson file
+                        4. Label: shows the upload date of the lesson file -->
+                        <Canvas Name="canvas1" Style="{StaticResource CanvasStyle}">
+                            <Image Name="image1" Style="{StaticResource ImageGreenStyle}"/>
+                            <Label Name="labelTitle1" Content="If Condition" Style="{StaticResource LabelTitleStyle}" />
+                            <TextBlock Name="textBlock1" Text="This is to help teacher to teach the if condition with the 3 different types." Style="{StaticResource TextBlockStyle}" />
+                            <Label Name="labelDate1" Content="12.10.2007" Style="{StaticResource LabelDateStyle}"/>
+                        </Canvas>
+
+                        <!-- Login user elements -->
+                        <Canvas Height="177" Name="canvasLogin" Width="325">
+                            <GroupBox Name="groupBox" Canvas.Left="62" Canvas.Top="-15" Header="Login" Height="137" Width="200" Foreground="#FF585858"></GroupBox>
+                            <Label Name="label1" Canvas.Left="74" Canvas.Top="11" Content="User" Height="28" Foreground="#FF585858" />
+                            <Label Name="label2" Canvas.Left="74" Canvas.Top="43" Content="Pass" Height="28" Foreground="#FF585858" />
+                            <TextBox Name="textBoxUser" Canvas.Left="112" Canvas.Top="14" Height="23" Width="133" />
+                            <PasswordBox Name="passwordBox" Canvas.Left="112" Canvas.Top="46" Height="23" Width="133" Password=""></PasswordBox>
+                            <CheckBox Canvas.Left="112" Canvas.Top="85" Content="Save" Height="16" Name="checkBox1" Foreground="#FF585858" />
+                            <Button Name="buttonLogin" Canvas.Left="185" Canvas.Top="81" Content="Login" Height="24" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Width="60" Click="buttonLogin_Click" Style="{StaticResource ButtonStyle}" TouchDown="buttonLogin_TouchDown" />
+                            <TextBlock Name="textBlockError" Canvas.Left="64" Canvas.Top="129" Foreground="#C8FF2828" Width="196" Height="40" TextWrapping="Wrap" />
+                        </Canvas>
+                    </StackPanel>
+                </ScrollViewer>                            
+            </Border>
+        </Canvas>
+    </Grid>
+</UserControl>

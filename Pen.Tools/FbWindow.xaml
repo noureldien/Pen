@@ -1,0 +1,76 @@
+﻿<Window x:Class="Pen.Tools.FbWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Pen.Tools"    
+    xmlns:t="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:m="clr-namespace:Wpf.Controls;assembly=Wpf.SplitButton"
+    Title="Share on Facebook" Background="Transparent" Loaded="Window_Loaded" 
+    WindowStyle="SingleBorderWindow" Name="windowMain" WindowStartupLocation="CenterScreen" 
+    ShowInTaskbar="False" Closing="windowMain_Closing" mc:Ignorable="d" 
+    Icon="/Pen.Tools;component/Images/facebook.png" ResizeMode="NoResize" Width="502" Height="340" xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit">
+    
+    <Window.Resources>
+
+        <!-- RadRating Style -->
+        <Style TargetType="telerik:RadRating" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=t:SummerTheme, ElementType=telerik:RadRating}}" />
+        
+    </Window.Resources>
+    
+    <Grid Name="gridMain" Height="300" Width="480">
+        
+        <Grid.Resources>
+            <!-- Vista Button Style -->
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>                    
+                    <ResourceDictionary Source="Themes\VistaButton.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>            
+        </Grid.Resources>
+        
+        <Canvas Name="canvasMain">            
+            <TextBlock Canvas.Left="6" Canvas.Top="240" Height="60" Name="textBlock1" Width="350" Foreground="White" FontSize="18" />
+            <Border BorderThickness="0" Canvas.Left="0" Canvas.Top="0" Height="236" Name="border1" BorderBrush="White" CornerRadius="10" Background="#320046B4" Width="480">
+                <InkCanvas Name="inkCanvas1" Height="232" VerticalAlignment="Top">
+                    <InkCanvas.Background>
+                        <SolidColorBrush />
+                    </InkCanvas.Background>
+                </InkCanvas>
+            </Border>
+            
+            <!-- The Vista Style is applied using a ComponentResourceKey   -->
+            <m:SplitButton Canvas.Left="372" Canvas.Top="274" Foreground="DarkBlue" 
+                           Height="30" Name="button1" Width="107" Click="button1_Click" Content="Share じ" Mode="Split" Style="{DynamicResource {x:Static m:SplitButtonResources.VistaSplitButtonStyleKey}}">                
+                <MenuItem Header="Student 1"/>
+                <MenuItem Header="Student 2"/>
+                <MenuItem Header="Student 3"/>
+                <MenuItem Header="Student 4"/>
+                <Separator/>
+                <MenuItem Header="Send to All"/>                
+            </m:SplitButton>
+            <my:Rating Canvas.Left="366" Canvas.Top="245" Height="25" Name="rating1" Width="112" Background="Transparent">                
+                <my:RatingItem Margin="1" />
+                <my:RatingItem Margin="1" />
+                <my:RatingItem Margin="1" />
+                <my:RatingItem Margin="1" />
+                <my:RatingItem Margin="1" />
+                <my:Rating.Foreground>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FFFFEF00" Offset="0" />
+                        <GradientStop Color="#FFFF9D00" Offset="1" />
+                        <GradientStop Color="#FFFFC023" Offset="0.552" />
+                    </RadialGradientBrush>
+                </my:Rating.Foreground>
+            </my:Rating>            
+            <!--<t:RadRating Canvas.Left="371" Canvas.Top="245" Name="radRating1" BorderThickness="1" Precision="Exact">
+                <t:RadRatingItem />
+                <t:RadRatingItem />
+                <t:RadRatingItem />
+                <t:RadRatingItem />
+                <t:RadRatingItem />
+            </t:RadRating>-->
+        </Canvas>
+    </Grid>
+</Window>

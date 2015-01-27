@@ -1,0 +1,4 @@
+E:\Program Files\VS Projects\IC 2011\WPF\WPF\bin\Debug\Math.exe.config
+E:\Program Files\VS Projects\IC 2011\WPF\WPF\obj\Debug\Interop.micautLib.dll
+E:\Program Files\VS Projects\IC 2011\WPF\WPF\obj\Debug\Math.csproj.ResolveComReference.cache
+E:\Program Files\VS Projects\IC 2011\WPF\WPF\bin\Debug\Pen.exe.config

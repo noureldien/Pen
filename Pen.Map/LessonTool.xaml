@@ -1,0 +1,275 @@
+﻿<Window x:Class="Pen.Map.LessonTool"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pen.Map"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:t="clr-namespace:Telerik.Windows.Controls.RibbonBar.Primitives;assembly=Telerik.Windows.Controls.RibbonBar"        
+        Title="Lesson Tool" Name="windowMain"         
+        WindowStartupLocation="CenterScreen" Closing="windowMain_Closing" 
+        mc:Ignorable="d"  Height="600" Width="950" Loaded="windowMain_Loaded" 
+        Icon="/Pen.Map;component/Images/tool.png" Background="Transparent">
+    
+    <Window.Resources>
+
+        <Style TargetType="telerik:RadColorPicker" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=telerik:SummerTheme, ElementType=telerik:RadColorPicker}}" />
+        
+        <!-- Style of Title StackPanel (which holds Title and Date TextBoxes) -->
+        <Style x:Key="StackPanelTitleStyle" TargetType="StackPanel">
+            <Setter Property="Canvas.Left" Value="0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Background" Value="#FFECF6FA" />
+            <Setter Property="Margin" Value="1,0" />
+            <Setter Property="Width" Value="458" />
+            <Setter Property="Margin" Value="1,10,1,0"/>
+        </Style>
+        <!-- Style of Title TextBox -->
+        <Style x:Key="TextBoxTitleStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="FontFamily" Value="Traditional Arabic" />
+            <Setter Property="FontSize" Value="28" />            
+            <Setter Property="Margin" Value="15,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <!-- Style of Date TextBox -->
+        <Style x:Key="TextBoxDateStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="110" />
+            <Setter Property="FontFamily" Value="Traditional Arabic" />
+            <Setter Property="FontSize" Value="28" />            
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="#FF0588C1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+        <!-- Style of Paragraph Grid (grid that holds Paragraph TextBox and dotted-line rextangle surrounding it) -->
+        <Style x:Key="GridParagraphStyle" TargetType="Grid">
+            <Setter Property="Canvas.Left" Value="20" />
+            <Setter Property="Height" Value="98" />
+            <Setter Property="Width" Value="420" />
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>        
+        <!-- Style of Paragraph TextBox -->
+        <Style x:Key="TextBoxParagraphStyle" TargetType="TextBox">
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontFamily" Value="Sakkal Majalla" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="BorderBrush" Value="Transparent" />                        
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="TextAlignment" Value="Justify"/>
+        </Style>
+        <!-- Style of Dotted Rectangle around the paragraph -->
+        <Style x:Key="RectangleParagraphStyle" TargetType="Rectangle">
+            <Setter Property="StrokeDashArray" Value="5.0" />
+            <Setter Property="Stroke" Value="LightGray" />
+            <Setter Property="StrokeDashCap" Value="Flat" />
+            <Setter Property="StrokeThickness" Value="1" />
+        </Style>
+
+        <!-- those styles rules the button
+        a button contains a stackPanel which contains 
+        1. a textBlock, represents button caption
+        2. an image,    represents button icon-->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>
+        </Style>
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>
+        </Style>
+        <Style x:Key="IconButton" TargetType="{x:Type Image}">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Margin" Value="5,2,5,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="TextButton" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="TextButtonArabicStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="Sakkal Majalla"/>            
+        </Style>
+        <Style x:Key="StackPanelButton" TargetType="{x:Type StackPanel}">
+            <!--<Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Height}"/>-->
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+        
+        <!-- Used as a background color of the focused title -->       
+        <LinearGradientBrush x:Key="TitleFocus" EndPoint="0.5,1" StartPoint="0.5,0">            
+            <GradientStop Color="#CF454545" Offset="0" />
+            <GradientStop Color="#FFF2F8FF" Offset="0.064" />
+            <GradientStop Color="#FFECF6FA" Offset="1" />
+        </LinearGradientBrush>
+               
+    </Window.Resources>
+    
+    <Grid Name="gridMain">
+        <Border Name="borderMain" Margin="2" CornerRadius="6" BorderThickness="1" BorderBrush="#FF003B9D">
+            <Canvas Name="canvasMain">
+
+                <!-- Mediator that forwards the property changes -->
+                <local:ScrollViewerOffsetMediator x:Name="mediator"/>
+
+                <!-- pop up of pin labeling -->
+                <Popup Name="popup" StaysOpen="False" Placement="MousePoint">
+                </Popup>
+                <Canvas Name="canvasPopup" Height="40" Width="180" Canvas.Left="485" Canvas.Top="379">
+                    <Button Canvas.Left="119" Canvas.Top="7" Height="27" Name="buttonPopup1" Width="25" Click="buttonPopup1_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Pen.Map;component/Images/ok.png" Stretch="None" TileMode="None" />
+                        </Button.Background>
+                    </Button>
+                    <Button Canvas.Left="149" Canvas.Top="7" Height="27" Name="buttonPopup2" Width="25" Click="buttonPopup2_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Pen.Map;component/Images/cancel.png" Stretch="None" TileMode="None" />
+                        </Button.Background>
+                    </Button>
+                    <TextBox Name="textBoxPopup" Canvas.Left="7" Canvas.Top="6" Height="28" Width="105" FontFamily="Sakkal Majalla" FontSize="18" />
+                    <Canvas.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="#FFC7C7C7" Offset="1" />
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                </Canvas>
+                              
+                <!-- Content on the left of the window (Lesson Content) -->
+                <Grid Name="gridConrent" Height="490" Width="460" Canvas.Left="13" Canvas.Top="15" Background="White">
+                    <!--<DropShadowEffect BlurRadius="15" Color="#FF383838" Opacity="1" ShadowDepth="0" />-->
+                    <!--<Rectangle StrokeDashArray="5" Stroke="LightGray" StrokeDashCap="Flat"  StrokeThickness="1"/>-->
+                    <t:DropShadow Name="dropShadowContent" />
+                    <ScrollViewer  Name="scrollViewerContent" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="stackPanelContent" Margin="0,0,0,20">
+                            <!-- Lesson Name -->
+                            <Canvas Name="canvasLessonName" Height="50" Width="460">
+                                <Label Canvas.Left="109" Canvas.Top="12" Content="العنــــــــــــــــــــــــــــ                                 ـــــــــــــــــــــوان" Name="labelLesson" Foreground="Gray" FontFamily="Sakkal Majalla" FontSize="20" />
+                                <TextBox Canvas.Top="14" Height="34" Name="textBoxLesson" Width="170" FontSize="22" FontFamily="Sakkal Majalla" Foreground="#FF0588C1" TextAlignment="Center" Canvas.Left="140" />
+                            </Canvas>
+                            <!-- Title 1 + its paragraphs  -->
+                            <StackPanel Name="stackPanelT1" Style="{StaticResource StackPanelTitleStyle}">
+                                <TextBox Name="textBoxT1" Style="{StaticResource TextBoxTitleStyle}" />
+                                <TextBox Name="textBoxD1" Style="{StaticResource TextBoxDateStyle}"/>                                
+                            </StackPanel>
+                            <local:Grid_ Style="{StaticResource GridParagraphStyle}">
+                                <Rectangle Style="{StaticResource RectangleParagraphStyle}"/>
+                                <TextBox Name="textBoxP11" Style="{StaticResource TextBoxParagraphStyle}"/>
+                            </local:Grid_>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+                <!-- Buttons under Lesson Content and controling Lesson Content -->
+                <!-- Open Lesson Access File -->
+                <Button Name="button1" Style="{StaticResource ButtonStyle}" Canvas.Left="12" Canvas.Top="510" Width="81" Click="button1_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/open.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="فتح" Name="textBlockButton1" />
+                    </StackPanel>
+                </Button>
+                <!-- Save Lesson to Access file -->
+                <Button Name="button2" Style="{StaticResource ButtonStyle}" Canvas.Left="99" Canvas.Top="510" Width="94" Click="button2_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/save.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="حفظ" Name="textBlockButton2" />
+                    </StackPanel>
+                </Button>
+                <!-- Open new Lesson Content -->
+                <Button Name="button3" Style="{StaticResource ButtonStyle}" Canvas.Left="198" Canvas.Top="510" Width="94" Click="button3_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/new.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="جديد" Name="textBlockButton3" />
+                    </StackPanel>
+                </Button>
+                <!-- Add new title -->
+                <Button Name="button4" Style="{StaticResource ButtonStyle}" Canvas.Left="298" Canvas.Top="510" Width="94" Click="button4_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/title.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="عنوان" Name="textBlockButton4" />
+                    </StackPanel>
+                </Button>
+                <!-- Add new parapgraph -->
+                <Button Name="button5" Style="{StaticResource ButtonStyle}" Canvas.Left="396" Canvas.Top="510" Width="86" Click="button5_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/paragraph.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="فقرة" Name="textBlockButton5" />
+                    </StackPanel>
+                </Button>
+                <!-- Add new parapgraph -->
+                <Button Name="button6" Style="{StaticResource ButtonStyle}" Canvas.Left="869" Canvas.Top="510" Width="48" Click="button6_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/language.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="" Name="textBlockButton6" />
+                    </StackPanel>
+                </Button>
+
+                <!-- Map Grid -->
+                <Grid Name="gridMap" Height="422" Width="410" Background="White" Canvas.Left="507" Canvas.Top="15">
+                    <WindowsFormsHost Name="controlHost" Margin="2" />
+                    <t:DropShadow Name="dropShadow1" />
+                </Grid>
+                <!-- Buttons Under the map and controling the map -->
+                <!-- Add pin to the map -->
+                <ToggleButton Name="toggleButton1" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="506" Canvas.Top="448" Width="94" Click="toggleButtonMap_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}" Height="Auto">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/pushpin.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="دبوس" Name="textBlockToggleButton1" />
+                    </StackPanel>
+                </ToggleButton>
+                <!-- Add polygon (shape) to the map -->
+                <ToggleButton Name="toggleButton2" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="606" Canvas.Top="448" Width="90" Click="toggleButtonMap_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}" Height="Auto">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/shape.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="شكل" Name="textBlockToggleButton2" />
+                    </StackPanel>
+                </ToggleButton>
+                <!-- Add polyline (shape) to the map -->
+                <ToggleButton Name="toggleButton3" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="704" Canvas.Top="448" Width="86" Click="toggleButtonMap_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}" Height="Auto">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/line.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="خط" Name="textBlockToggleButton3" />
+                    </StackPanel>
+                </ToggleButton>
+                <!-- Add position of the map corresponding to current Title -->
+                <ToggleButton Name="toggleButton4" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="506" Canvas.Top="490" Width="94" Click="toggleButtonMap_Click">
+                    <StackPanel Style="{StaticResource StackPanelButton}" Height="Auto">
+                        <Image Style="{StaticResource IconButton}" Source="/Pen.Map;component/Images/position.png" />
+                        <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="مؤشر" Name="textBlockToggleButton4" />
+                    </StackPanel>
+                </ToggleButton>
+                <!-- Color Picker -->
+                <TextBlock Style="{StaticResource TextButtonArabicStyle}" Text="لـون" Canvas.Left="654" Canvas.Top="494" Name="textBlockColorPicker" />
+                <telerik:RadColorPicker Canvas.Left="618" Canvas.Top="500" Name="radColorPicker1" SelectedColorChanged="radColorPicker1_SelectedColorChanged"/>
+                
+
+
+                <Button Content="Button" Height="23" Name="button" Width="64" Canvas.Left="799" Canvas.Top="520" Click="button_Click" Visibility="Hidden" />                
+            </Canvas>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC8E6F0" Offset="0" />
+                    <GradientStop Color="White" Offset="0.081" />
+                    <GradientStop Color="White" Offset="0.907" />
+                    <GradientStop Color="#FFC8E6F0" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+    </Grid>
+</Window>

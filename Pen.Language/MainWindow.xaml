@@ -1,0 +1,378 @@
+﻿<Window x:Class="Pen.Language.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:t="clr-namespace:Telerik.Windows.Controls.RibbonBar.Primitives;assembly=Telerik.Windows.Controls.RibbonBar"
+        xmlns:my="clr-namespace:FsWpfControls.FsRichTextBox;assembly=FsRichTextBox"
+        xmlns:tools="clr-namespace:Pen.Tools;assembly=Pen.Tools"
+        xmlns:local="clr-namespace:Pen.Language"
+        Title="Pen Language" Height="880" Width="1340" Name="windowMain"
+        WindowStartupLocation="CenterScreen" Icon="/Pen.Language;component/Images/icon.png" 
+        Closing="windowMain_Closing" Loaded="windowMain_Loaded" KeyDown="windowMain_KeyDown">
+    
+    <Window.Resources>
+
+        <!-- Style/Theme of the radColorPicker -->
+        <Style TargetType="telerik:RadColorPicker" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=telerik:TransparentTheme, ElementType=telerik:RadColorPicker}}"/>
+
+        <local:FlowDocumentToXamlConverter x:Key="flowDocumentConverter"/>
+
+        <!-- those styles rules the button
+        a button contains a stackPanel which contains
+        1. a textBlock, represents button caption
+        2. an image,    represents button icon-->        
+        <Style x:Key="ToggleButtonStyle2" TargetType="ToggleButton">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <Grid Name="gridToggleButton">
+                                <ContentPresenter Content="{TemplateBinding Property=Button.Content}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter TargetName="gridToggleButton" Property="Background" Value="Transparent"/>                                    
+                            </Trigger>                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ToggleButtonStyle1" TargetType="ToggleButton">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable"   Value="False"/>            
+        </Style>
+        <Style x:Key="IconButtonStyle" TargetType="{x:Type Image}">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="TextButtonStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>        
+        <Style x:Key="StackPanelButtonStyle" TargetType="{x:Type StackPanel}">
+            <!--<Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Height}"/>-->            
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Orientation" Value="Horizontal"/>            
+        </Style>
+
+        <!-- Custom ToggleButton -->
+        <Style x:Key="ValidationToggleButton" TargetType="ToggleButton">
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <Grid Name="MainGrid" Background="{TemplateBinding Background}">
+                            <Viewbox>
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                              Content="{TemplateBinding Property=Button.Content}" />
+                            </Viewbox>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter TargetName="MainGrid" Property="Background" Value="#88FFFF55" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Style of Paging label (paging of lesson) -->
+        <Style x:Key="LabelPageStyle" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="Segoe WP"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#FF009600"/>
+            <!--<Setter Property="" Value=""/>
+            <Setter Property="" Value=""/>
+            <Setter Property="" Value=""/>
+            Margin="0,570,17,0"-->
+        </Style>
+        
+        <!-- Style of the separator rectangle -->
+        <Style x:Key="RectangleStyle" TargetType="Rectangle">
+            <Setter Property="Canvas.Top" Value="704"/>
+            <Setter Property="Width" Value="1"/>
+            <Setter Property="Height" Value="88"/>           
+            <Setter Property="Stroke">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Transparent" Offset="0" />
+                        <GradientStop Color="#6F207645" Offset="0.698" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                        <GradientStop Color="#6F207645" Offset="0.233" />
+                    </LinearGradientBrush>                    
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Style of Border around Button Controls in the Buttom -->
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Canvas.Top" Value="695"/>
+            <Setter Property="Height" Value="120"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="BorderBrush" Value="#6F207645"/>            
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Transparent" Offset="0.017" />
+                        <GradientStop Color="#FFF0FAEB" Offset="0.448" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid Name="gridMain" Height="800" Width="1280">
+
+        <Grid.Resources>           
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>                    
+                    <ResourceDictionary Source="Themes\ToggleButton.xaml"/>
+                    <ResourceDictionary Source="Themes\Button.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Canvas Name="canvasMain">
+
+            <!-- Mediator that forwards the property changes to scroll the Lesson ScrollViewer -->
+            <local:ScrollViewerOffsetMediator x:Name="mediator"/>
+            <!-- Application Background Image -->
+            <Image Source="/Pen.Language;component/Images/background.png" Opacity="0.04" Name="imageBackground" Height="0" Width="1280" Canvas.Top="-200" Canvas.Left="0" />
+            <!-- Popup of webfilePanel (open and download lesson files form the internet) -->
+            <Popup Name="popupFilePanel" IsOpen="False" StaysOpen="False" AllowsTransparency="True" Placement="Center" Closed="popupFilePanel_Closed">
+                <tools:WebfilePanel x:Name="webfilePanel"/>
+            </Popup>
+            <!-- Popup of LessonTool -->
+            <Popup  Name="popupLessonTool" IsOpen="False" StaysOpen="False" Canvas.Left="1000" Canvas.Top="100" AllowsTransparency="True" Placement="Center" Closed="popupLessonTool_Closed">
+                <Border Name="borderPopup"  Height="570" Width="800" CornerRadius="6" BorderThickness="1" BorderBrush="#6F207645">
+                    <Canvas>
+                        <!-- Rich Text Box -->
+                        <my:FsRichTextBox Height="510" Width="781" Canvas.Left="8" Canvas.Top="15" Name="textBoxTool" CodeControlsVisibility="Hidden"
+                                          Document="{Binding Path=DocumentXaml, Converter={StaticResource flowDocumentConverter}, Mode=TwoWay}"/>
+                        <!-- Color Picker -->
+                        <telerik:RadColorPicker Canvas.Left="358" Canvas.Top="15" Name="radColorPickerPopup" SelectedColorChanged="radColorPickerPopup_SelectedColorChanged"/>
+                        <!-- OK Button -->
+                        <Button Name="buttonPopupOk" Style="{StaticResource ButtonStyle}" Canvas.Left="751" Canvas.Top="526" Width="38" Click="buttonPopupOk_Click">
+                            <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/ok.png" VerticalAlignment="Center" Margin="0" />
+                        </Button>
+                    </Canvas>
+                    <!--#3CB4DC82 #C8DCF0D2 #C8DCF0C3 -->
+                        <Border.Background> 
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#3CB4DC82" Offset="0" />
+                            <GradientStop Color="White" Offset="0.1" />
+                            <GradientStop Color="White" Offset="0.9" />
+                            <GradientStop Color="#3CB4DC82" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Popup>
+
+            <!-- ControlBox, controls in top right of the window  -->
+            <StackPanel Name="stackPanelControlBox" Orientation="Horizontal" Canvas.Left="1177" Canvas.Top="0" Opacity="0.6">
+                <Button Style="{StaticResource ButtonStyle}" Canvas.Left="1223" Canvas.Top="0" Name="buttonHelp" Width="50" >
+                    <Image Source="/Pen.Language;component/Images/help.png"></Image>
+                </Button>
+                <Button Canvas.Left="1173" Style="{StaticResource ButtonStyle}" Canvas.Top="0" Name="buttonClose" Width="50" TouchDown="buttonClose_TouchDown">
+                    <Image Source="/Pen.Language;component/Images/off.png" />
+                </Button>
+            </StackPanel>
+            <!-- Controls in top left of the window (logo, captionText, time)-->
+            <StackPanel  Name="stackPanelCaption" Orientation="Horizontal">
+                <Image Canvas.Left="0" Canvas.Top="6" Height="40" Name="imageLogo" Width="75" Source="/Pen.Language;component/Images/logo1.png" Stretch="None" />
+                <TextBlock Name="textCaption" Text="Pen Map | " VerticalAlignment="Center" Foreground="#FF878787" FontSize="18" FontFamily="Segoe WP Light" />
+            </StackPanel>
+
+            <!-- scrollViewer of Lesson Content -->
+            <ScrollViewer Canvas.Left="20" Canvas.Top="60" Name="scrollViewerLesson" Width="900" Height="620" VerticalScrollBarVisibility="Hidden">                
+                <local:Grid_ x:Name="gridLesson" Height="2480">
+                    <Label Name="labelPage1" Content="1" Margin="0,575,17,0" Style="{StaticResource LabelPageStyle}"/>
+                    <Label Name="labelPage2" Content="2" Margin="0,1195,17,0" Style="{StaticResource LabelPageStyle}"/>
+                    <Label Name="labelPage3" Content="3" Margin="0,1815,17,0" Style="{StaticResource LabelPageStyle}"/>
+                    <Label Name="labelPage4" Content="4" Margin="0,2435,17,0" Style="{StaticResource LabelPageStyle}"/>
+                    <InkCanvas Name="inkCanvasLesson" Background="Transparent" TouchDown="inkCanvasLesson_TouchDown">
+                    </InkCanvas>
+                    <RichTextBox Name="textBoxLesson" AcceptsReturn="True" AcceptsTab="True" Background="Transparent" VerticalScrollBarVisibility="Auto" FontSize="18" SelectionBrush="#FF3CD23C" IsHitTestVisible="False">
+                    </RichTextBox>
+                </local:Grid_>
+                <ScrollViewer.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#78FFFFFF" Offset="0" />
+                        <GradientStop Color="#C8DCF0C3" Offset="1" />
+                    </LinearGradientBrush>
+                </ScrollViewer.Background>
+                
+                <!-- #53B4DC82 #1450BE00 ##C8DCF0D2 -->
+                <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#54FFFFFF" Offset="0" />
+                    <GradientStop Color="#1450BE00" Offset="1" />
+                </LinearGradientBrush>-->
+                <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#6CFFFFFF" Offset="0" />
+                        <GradientStop Color="#5DAADC7D" Offset="1" />
+                    </LinearGradientBrush>-->                    
+                    <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#54FFFFFF" Offset="0.058" />
+                        <GradientStop Color="#3F3C9450" Offset="1" />
+                    </LinearGradientBrush>-->
+                    <!--<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#20B4DC82" Offset="0" />
+                        <GradientStop Color="#6BB4DC82" Offset="1" />
+                    </LinearGradientBrush>-->                
+            </ScrollViewer>
+            <t:DropShadow Name="dropShadow1" ShadowColor="DarkGray" ShadowSize="5"  Canvas.Left="20" Canvas.Top="60"
+                          Height="{Binding ElementName=scrollViewerLesson, Path=Height}"
+                          Width="{Binding ElementName=scrollViewerLesson, Path=Width}"/>
+
+            <!-- Borders and Separators (just elements for a good-looking design) -->
+            <Border Name="border1" Canvas.Left="20" Width="560" Style="{StaticResource BorderStyle}"/>            
+            <Border Name="border2" Canvas.Left="965" Width="295" Style="{StaticResource BorderStyle}"/>            
+            <Rectangle Name="rectangle1" Canvas.Left="201" Style="{StaticResource RectangleStyle}"/>
+            <Rectangle Name="rectangle2" Canvas.Left="344" Style="{StaticResource RectangleStyle}"/>            
+
+            <!-- Editing Modes of the writing grid -->            
+            <!-- Handwriting Recognititon -->
+            <ToggleButton Name="toggleButton1" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="30" Canvas.Top="703" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/write.png" VerticalAlignment="Center" />
+            </ToggleButton>
+            <!-- Text Editing -->
+            <ToggleButton Name="toggleButton2" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="80" Canvas.Top="703" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/edit.png" VerticalAlignment="Center" />
+            </ToggleButton>
+            <!-- Pen -->
+            <ToggleButton Name="toggleButton3" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="30" Canvas.Top="750" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/pen.png" VerticalAlignment="Center" />
+            </ToggleButton>
+            <!-- Marker -->
+            <ToggleButton Name="toggleButton4" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="80" Canvas.Top="750" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/marker.png" VerticalAlignment="Center" />
+            </ToggleButton>
+            <!-- Eraser -->
+            <ToggleButton Name="toggleButton5" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="130" Canvas.Top="750" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/eraser.png" VerticalAlignment="Center" />
+            </ToggleButton>            
+            <!-- Freehand scrolling -->
+            <ToggleButton Name="toggleButton6" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="130" Canvas.Top="703" Width="47" Click="buttonMode_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/scroll.png" VerticalAlignment="Center" />
+            </ToggleButton>
+            
+            <!-- Scroll Up the lesson content -->
+            <Button Name="buttonUp" Style="{StaticResource ButtonStyle}"  Canvas.Left="228" Canvas.Top="703" Width="47" Click="buttonScroll_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/up.png" VerticalAlignment="Center" />
+            </Button>
+            <!-- Scroll down the lesson content -->
+            <Button Name="buttonDown" Style="{StaticResource ButtonStyle}"  Canvas.Left="228" Canvas.Top="750" Width="47" Click="buttonScroll_Click">
+                <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/down.png" VerticalAlignment="Center" />
+            </Button>
+
+            <!-- Color Picker -->
+            <telerik:RadColorPicker Canvas.Left="288" Canvas.Top="713" Name="radColorPicker1" SelectedColor="Green" Height="30" SelectedColorChanged="radColorPicker1_SelectedColorChanged" />
+                    
+            <!-- Buttons used to do manipulations on the writing text -->
+            <!-- Translate -->
+            <Button Name="button1" Style="{StaticResource ButtonStyle}" Canvas.Left="364" Canvas.Top="703" Width="126" Click="buttonTool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/translate.png" />
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Translate" />
+                </StackPanel>
+            </Button>
+            <!-- Check Spelling -->
+            <Button Name="button2" Style="{StaticResource ButtonStyle}" Canvas.Left="364" Canvas.Top="750" Width="117" Click="buttonTool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/spelling.png" />
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Spelling" />
+                </StackPanel>
+            </Button>
+            <!-- Text-to-Speech TTS -->
+            <Button Name="button3" Style="{StaticResource ButtonStyle}" Canvas.Left="490" Canvas.Top="750" Width="85" Click="buttonTool_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}" Height="Auto">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/speak.png" />
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Talk" />
+                </StackPanel>
+            </Button>
+            <!-- Speech Recognititon -->
+            <ToggleButton Name="button4" Style="{StaticResource ToggleButtonStyle}" Canvas.Left="500" Canvas.Top="703" Width="68" Click="buttonSpeechRecognition_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/micoff.png" Margin="0" />
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Off" Margin="0,5,0,0" />
+                </StackPanel>
+            </ToggleButton>
+
+            <!-- Button Dealing with lesson files (new, open, save) -->
+            <!-- New Lesson File -->
+            <Button Name="buttonNew" Style="{StaticResource ButtonStyle}" Canvas.Left="970" Canvas.Top="750" Width="90" Click="buttonFile_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/new.png"/>
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="New"/>
+                </StackPanel>
+            </Button>
+            <!-- Open Lesson File -->
+            <Button Name="buttonOpen" Style="{StaticResource ButtonStyle}" Canvas.Left="1062" Canvas.Top="750" Width="95" Click="buttonFile_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}" Height="Auto">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/open.png" />
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Open" />
+                </StackPanel>
+            </Button>
+            <!-- Save Lesson File -->
+            <Button Name="buttonSave" Style="{StaticResource ButtonStyle}" Canvas.Left="970" Canvas.Top="707" Width="90" Click="buttonFile_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/save.png"/>
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Save"/>
+                </StackPanel>
+            </Button>
+            <!-- Build Lesson -->
+            <Button Name="buttonBuild" Style="{StaticResource ButtonStyle}" Canvas.Left="1062" Canvas.Top="707" Width="95" Click="buttonBuild_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/build.png"/>
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Build"/>
+                </StackPanel>
+            </Button>
+            <!-- Share on facebook -->
+            <Button Name="buttonShare" Style="{StaticResource ButtonStyle}" Canvas.Left="1159" Canvas.Top="707" Width="95" Click="buttonFile_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/share.png"/>
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Share"/>
+                </StackPanel>
+            </Button>
+            <!-- Open files from the internet -->
+            <Button Name="buttonWeb" Style="{StaticResource ButtonStyle}" Canvas.Left="1159" Canvas.Top="750" Width="90" Click="buttonWeb_Click">
+                <StackPanel Style="{StaticResource StackPanelButtonStyle}">
+                    <Image Style="{StaticResource IconButtonStyle}" Source="/Pen.Language;component/Images/openweb.png"/>
+                    <TextBlock Style="{StaticResource TextButtonStyle}" Text="Web"/>
+                </StackPanel>
+            </Button>
+
+            <!-- .................................................................. -->
+            
+            <!-- Button of experiments -->
+            <Button Content="button" Height="30" Name="button" Width="90" Canvas.Left="654" Canvas.Top="705" Click="button_Click"
+                    Style="{StaticResource ButtonStyle}" Visibility="Collapsed">
+                <!--<Button.Effect>
+                    <DropShadowEffect BlurRadius="5" Color="Black" Opacity="0.7" ShadowDepth="0" />
+                </Button.Effect>-->
+            </Button>
+            <TextBox Canvas.Left="609" Canvas.Top="753" Height="29" Name="textBox2" Width="167" AcceptsReturn="True" AcceptsTab="True" Visibility="Collapsed" />
+        </Canvas>
+    </Grid>
+</Window>

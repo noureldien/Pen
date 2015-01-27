@@ -1,0 +1,104 @@
+﻿<Window x:Class="Pen.Intro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        Title="Pen Applications" Height="390" Width="600" 
+        Loaded="Window_Loaded" Background="Transparent" Name="mainWindow" ResizeMode="NoResize"
+        Icon="/Pen.Intro;component/Images/logo.png" Closing="Window_Closing">
+    
+    <Window.Resources>
+        <!-- Style of radTileView -->
+        <Style TargetType="telerik:RadTileViewItem" BasedOn="{StaticResource {telerik:ThemeResourceKey ThemeType=telerik:Windows7Theme, ElementType=telerik:RadTileViewItem}}" />        
+        <!-- Style of the image -->
+        <Style x:Key="ImageStyle" TargetType="Image">
+            <Setter Property="Canvas.Left" Value="318" />            
+            <Setter Property="Canvas.Top" Value="18" />
+            <Setter Property="Height" Value="128" />
+            <Setter Property="Width" Value="128" />
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>        
+        <!-- Style of TextBlock of Content -->
+        <Style x:Key="TextBlockContentStyle" TargetType="TextBlock">
+            <Setter Property="Width" Value="262"/>
+            <Setter Property="Canvas.Left" Value="18"/>
+            <Setter Property="Canvas.Top" Value="62"/>
+            <Setter Property="FontFamily" Value="Segoe WP Light"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#FF6F6F6F"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Justify"/>
+        </Style>
+    </Window.Resources>
+        
+    <Grid>        
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>                  
+                    <ResourceDictionary Source="Themes\Button.xaml"/>                    
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        
+        <telerik:RadTileView Height="373" HorizontalAlignment="Left" Name="radTileView" 
+                             VerticalAlignment="Top" Width="600" MinimizedItemsPosition="Right" MinimizedColumnWidth="120" 
+                             MinimizedRowHeight="50" Margin="-4,-7,0,0" MaximizeMode="One" TileStateChangeTrigger="None">
+            <telerik:RadTileViewItem Name="radTileViewItem1" TileState="Maximized" Header="Math" MouseUp="radTileViewItem_MouseUp">                
+                <Canvas Name="canvasTile1">
+                    <Image Name="image1" Source="/Pen.Intro;component/Images/Math.png" Style="{StaticResource ImageStyle}"/>
+                    <Button Name="button1" Canvas.Left="347" Canvas.Top="260" Content="Start.." Height="30" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <TextBlock Name="textBlockTitle1" Canvas.Left="18" Canvas.Top="18" Height="35" Text="Pen Math" FontFamily="Segoe WP Light" FontSize="26" />
+                    <TextBlock Name="textBlockContent11" Height="148" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Helps the teacher to teach algebra and geometry lessons.  Assign equation tasks to students, draw the graph of the equations  and draw geometric shapes."/>
+                    <TextBlock Name="textBlockContent12" Height="99"  Canvas.Top="195" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Application can respond to user actions, which means that a teacher and a student can work on the application."/>
+                </Canvas>
+            </telerik:RadTileViewItem>
+            <telerik:RadTileViewItem Name="radTileViewItem2" TileState="Minimized" Header="Map" MouseUp="radTileViewItem_MouseUp">
+                <Canvas Name="canvasTile2">
+                    <Image Name="image2" Source="/Pen.Intro;component/Images/Map.png" Style="{StaticResource ImageStyle}"/>
+                    <Button Name="button2" Canvas.Left="347" Canvas.Top="260" Content="Start.." Height="30" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <TextBlock Name="textBlockTitle2" Canvas.Left="18" Canvas.Top="18" Height="35" Text="Pen Map" FontFamily="Segoe WP Light" FontSize="26" />
+                    <TextBlock Name="textBlockContent21" Height="101" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Helps teachers to teach history and geography lessons. The 3D globe presents a new level of interaction to the students."/>
+                    <TextBlock Name="textBlockContent22" Height="136"  Canvas.Top="168" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Draw labels and shapes for more illustrations. Content of the lesson can be saved in a separate file (lesson file). Teachers and students can create and share lesson files."/>
+                </Canvas>                
+            </telerik:RadTileViewItem>
+            <telerik:RadTileViewItem Name="radTileViewItem3" TileState="Minimized" Header="Language" MouseUp="radTileViewItem_MouseUp">
+                <Canvas Name="canvasTile3">
+                    <Image Name="image3" Canvas.Top="15" Source="/Pen.Intro;component/Images/Language.png" Style="{StaticResource ImageStyle}"/>
+                    <Button Name="button3" Canvas.Left="347" Canvas.Top="260" Content="Start.." Height="30" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <TextBlock Name="textBlockTitle3" Canvas.Left="18" Canvas.Top="18" Height="35" Text="Pen Language" FontFamily="Segoe WP Light" FontSize="26" />
+                    <TextBlock Name="textBlockContent31" Height="101" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Teach language lessons. Save the lesson files and share it with his students. With website account, lesson files are on the go."/>
+                    <TextBlock Name="textBlockContent32" Height="125"  Canvas.Top="168" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Focus on improving the language skills by many facilities. Voice recognition, pronounce sentences, handwriting recognition, language translation and spell checker."/>
+                </Canvas>
+            </telerik:RadTileViewItem>
+            <telerik:RadTileViewItem Name="radTileViewItem4" TileState="Minimized" Header="Tools" MouseUp="radTileViewItem_MouseUp" Position="0">
+                <Canvas Name="canvasTile4">                    
+                    <Image Name="image4" Canvas.Top="5" Source="/Pen.Intro;component/Images/tool.png" Style="{StaticResource ImageStyle}"/>                    
+                    
+                    <TextBlock Name="textBlockTitle41" Canvas.Left="18" Canvas.Top="7" Text="1. Pen Map Tool" FontFamily="Segoe WP Light" FontSize="20" />                    
+                    <TextBlock Name="textBlockContent41" Height="60" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Helps the teacher to build Pen Maps Lesson files. Draw shapes on the map. Set the text content of the lesson." FontSize="14" Canvas.Top="37" />
+                    <Button Name="button4" Canvas.Left="202" Canvas.Top="83" Content="Start.." Height="27" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <Border BorderBrush="#c9cdd2" Margin="10 190 10 20" VerticalAlignment="Top" BorderThickness="0 1 0 0" Grid.ColumnSpan="3" Width="270" Height="10" Canvas.Top="-70" Canvas.Left="2">
+                        <Border BorderBrush="#ffffff" BorderThickness="0 1 0 0" />
+                    </Border>
+
+                    <TextBlock Name="textBlockTitle42" Canvas.Left="18" Canvas.Top="125" Text="2. Pen Service" FontFamily="Segoe WP Light" FontSize="20" />                    
+                    <TextBlock Name="textBlockContent42" Height="76"  Canvas.Top="155" Style="{StaticResource TextBlockContentStyle}"
+                               Text="Calibrate camera to start the touch service. Adjust number of cursors and postitions. Finally, start multitouch and multimice services." FontSize="14" />                    
+                    <Border BorderBrush="#FF8D8D8D" VerticalAlignment="Top" BorderThickness="0.6,0,0,0" Width="10" Height="93" Canvas.Top="185" Canvas.Left="325" Visibility="Hidden">
+                        <Border BorderBrush="#ffffff" BorderThickness="0.6,0,0,0" Visibility="Hidden" />
+                    </Border>
+                    <Button Name="button5" Canvas.Left="16" Canvas.Top="246" Content="Service" Height="27" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <Button Name="button6" Canvas.Left="109" Canvas.Top="246" Content="Touch" Height="27" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <Button Name="button7" Canvas.Left="202" Canvas.Top="246" Content="Touch ID" Height="27" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                    <Button Name="button8" Canvas.Left="16" Canvas.Top="281" Content="Multimice" Height="27" Width="80" Style="{StaticResource ButtonStyle}" Click="buttonStart_Click"/>
+                </Canvas>
+            </telerik:RadTileViewItem>
+        </telerik:RadTileView>
+    </Grid>
+</Window>

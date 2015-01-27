@@ -1,0 +1,2943 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.MapPoint.UtilityPartialTrust</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.MapPoint.Constants">
+            <summary>
+            Various global constants.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.RadiusOfEarthMeters">
+            <summary>
+            Radius of earth in meters
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.RadiansPerDegree">
+            <summary>
+            The number of radians in a degree (PI / 180).  This is not an exact value.
+            This value can be used for conversion from degrees to radians.  
+            For example: radianAngle = degreeAngle * RadiansPerDegree
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.DegreesPerRadian">
+            <summary>
+            The number of degrees in a radian (180 / PI).  This is not an exact value.
+            This value can be used for conversion from radians to degrees.
+            For example: degreeAngle = radianAngle * DegreesPerRadian
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.KilometersPerMile">
+            <summary>
+            The number of kilometers in a mile (1.609344).  This is an exact value.
+            This value can be used for conversion from miles to kilometers.
+            For example: kilometerDistance = mileDistance * KilometersPerMile
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.MilesPerKilometer">
+            <summary>
+            The number of miles in a kilometer (~0.621371).  This is not an exact value.
+            This value can be used for conversion from kilometers to miles.
+            For example: mileDistance = kilometerDistance * MilesPerKilometer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.MetersPerFoot">
+            <summary>
+            The number of meters in a foot (0.3048).  This is an exact value.
+            This value can be used for conversion from feet to meters.
+            For example: meterDistance = footDistance * MetersPerFoot.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.KilometersPerFoot">
+            <summary>
+            The number of kilometers in a foot (0.0003048).  This is an exact value.
+            This value can be used for conversion from feet to kilometers.
+            For example: kilometerDistance = footDistance * KilometersPerFoot
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.FeetPerMeter">
+            <summary>
+            The number of feet in a meter (~3.2808399).  This is not an exact value.
+            This value can be used for conversion from meters to feet.
+            For example: footDistance = meterDistance * FeetPerMeter
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.FeetPerKilometer">
+            <summary>
+            The number of feet in a kilometer (~3280.8399).  This is not an exact value.
+            This value can be used for conversion from kilometers to feet.
+            For example: footDistance = kilometerDistance * FeetPerKilometer
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.KilometersPerMeter">
+            <summary>
+            The number of Kilometers in a Meter (0.001).  This is an exact value.
+            This value can be used for conversion from meters to kilometers.
+            For example: kilometerDistance = meterDistance * KilometersPerMeter
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.MetersPerInch">
+            <summary>
+            The number of Meters in an Inch (0.0254).  This is an exact value.
+            This value can be used for conversion from inches to meters.
+            For example: meterDistance = inchDistance * MetersPerInch
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.InchesPerMeter">
+            <summary>
+            The number of Inches in a Meter (~39.370079).  This is not an exact value.
+            This value can be used for conversion from meters to inches.
+            For example: inchDistance = meterDistance * InchesPerMeter
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.KilometersPerInch">
+            <summary>
+            The number of Kilometers in an Inch (0.0000254).  This is an exact value.
+            This value can be used for conversion from inches to kilometers.
+            For example: kilometerDistance = inchDistance * KilometersPerInch
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.InchesPerKilometer">
+            <summary>
+            The number of Inches in a Kilometer (~39370.079).  This is not an exact value.
+            This value can be used for conversion from kilometers to inches.
+            For example: inchDistance = kilometerDistance * InchesPerKilometer
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.HalfPI">
+            <summary>
+            Half of PI (~1.570796).  This is not an exact value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.TwoPI">
+            <summary>
+            Two times PI (~6.283185).  This is not an exact value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.FrameworkTicksPerSecond">
+            <summary>
+            Ticks (matching the .NET Framework ticks that are 100 nanoseconds each) per second (10,000,000).  This is an exact value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.FrameworkTicksPerMillisecond">
+            <summary>
+            Ticks (matching the .NET Framework ticks that are 100 nanoseconds each) per millisecond (10,000).  This is an exact value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.SecondsPerFrameworkTick">
+            <summary>
+            Seconds per tick (matching the .NET Framework ticks that are 100 nanoseconds each) (0.0000001).  This is an exact value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Constants.MillisecondsPerFrameworkTick">
+            <summary>
+            Seconds per tick (matching the .NET Framework ticks that are 100 nanoseconds each) (0.0001). This is an exact value.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Culture">
+            <summary>
+            Utility class for setting a default culture to use throughout our assemblies.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Culture.GetCulture(System.Int32)">
+            <summary>
+            Gets the culture with the specified LCID.
+            </summary>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Culture.GetCulture(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Globalization.CultureInfo"/> class based on the culture specified by 
+            name.  If the language is recognized but not the region, the base language will be used.  The identifier may also be an 
+            LCID in decimal or hexadecimal.  If none of these methods succeed, throws an ArgumentException.
+            </summary>
+            <param name="identifier">A predefined System.Globalization.CultureInfo name, System.Globalization.CultureInfo.Name
+                of an existing System.Globalization.CultureInfo, Windows-only culture name, a decimal integer specifying an
+                lcid, or a hexadecimal number preceded with "0x" that specifies an lcid.</param>
+            <returns>The created culture.</returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Culture.Invariant">
+            <summary>
+            Gets the invariant culture.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Culture.Default">
+            <summary>
+            Gets or sets the default culture to use.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.CustomCultureInfo">
+            <summary>
+            A derivative of <see cref="T:System.Globalization.CultureInfo"/> that uses a base value for all standard culture functions, but preserves a custom name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.CustomCultureInfo.#ctor(System.String,System.String)">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.MapPoint.Utility.CustomCultureInfo"/>.
+            </summary>
+            <param name="customCultureName">The custom name of this culture.</param>
+            <param name="baseCultureName">The name of the culture that this culture should derive its values from.</param>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.CustomCultureInfo.CustomName">
+            <summary>
+            The custom name this culture was constructed with.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ArrayPool`1">
+            <summary>
+            A pool of array objects.
+            </summary>
+            <typeparam name="Type"></typeparam>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ArrayPool`1.AllowedExpansion">
+            <summary>
+            An inflation value that the pool tries to stay under when selecting an array to return for a request.
+            If it cannot find one under this threshold, it returns any array it can.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.#ctor(System.Int64)">
+            <summary>
+            Creates a new pool of array objects of the given type.
+            </summary>
+            <param name="maxElements">The maximum number of elements for this cache to store.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.BorrowToken(System.Int32,System.Boolean)">
+            <summary>
+            Borrows a token wrapping an array of the given size.  
+            Creates a new one if one is not already present.
+            </summary>
+            <param name="size">The size needed.</param>
+            <param name="exact">If false, a larger array will be returned if available.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.Borrow(System.Int32,System.Boolean)">
+            <summary>
+            Borrows an array of the given size.  Creates a new one if one is not already present.
+            </summary>
+            <param name="size">The size needed.</param>
+            <param name="exact">If false, a larger array will be returned if available.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.GetFibonacciSize(System.Int32)">
+            <summary>
+            Making allocations along Fibonacci numbers provides two benefits:  first, it reduces the incidence of cases where
+            we borrow an array of size N, return, then N + smallNumber, and so on so that we have to create a new one.  Second,
+            it makes the allocations in the Large Object Heap more reusable.
+            This sequence is actually part of:
+            1 = 8
+            2 = 8
+            3 = 8
+            N = (N-2) + (N-3)
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.Return(`0[])">
+            <summary>
+            Returns an array to the pool.  To return a Token, simply dispose it.
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.Trim(System.Int64)">
+            <summary>
+            Trims the pool to contain no more than the provided number of elements.
+            Not threadsafe, only call within lock.
+            </summary>
+            <param name="desiredSize"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayPool`1.ToString">
+            <summary>
+            Returns a string representation of the object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayPool`1.Count">
+            <summary>
+            Returns the number of arrays stored in the pool.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayPool`1.CurrentSize">
+            <summary>
+            Returns the total number of elements in all the stored arrays.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayPool`1.MaximumSize">
+            <summary>
+            Gets or sets the maximum number of elements for this cache to store.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayPool`1.Enabled">
+            <summary>
+            If set to false, the pool will stop keeping arrays that are returned.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ArrayToken`1">
+            <summary>
+            An object that is capable of returning itself to a pool that created it.
+            </summary>
+            <typeparam name="Type"></typeparam>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayToken`1.#ctor(Microsoft.MapPoint.Utility.ArrayPool{`0},`0[],System.Int32)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="owner"></param>
+            <param name="buffer"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayToken`1.Finalize">
+            <summary>
+            Destructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ArrayToken`1.Dispose">
+            <summary>
+            Returns the buffer to the owning pool.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayToken`1.Length">
+            <summary>
+            The number of elements that were borrowed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayToken`1.Array">
+            <summary>
+            The borrowed buffer.  May be larger than the size requested -- elements beyond <see cref="P:Microsoft.MapPoint.Utility.ArrayToken`1.Length"/>
+            should be considered invalid.  Will be null if the token is disposed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayToken`1.Item(System.Int32)">
+            <summary>
+            Indexer.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ArrayToken`1.IsDisposed">
+            <summary>
+            True if the token has been disposed already and the buffer returned to the pool.
+            <see cref="P:Microsoft.MapPoint.Utility.ArrayToken`1.Array"/> is still accessible, but is no longer safe to use.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Array2DPool`1">
+            <summary>
+            A pool of multidimensional array objects.
+            </summary>
+            <typeparam name="Type"></typeparam>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.#ctor(System.Int64)">
+            <summary>
+            Creates a new pool of array objects of the given type.
+            </summary>
+            <param name="maxElements">The maximum number of elements for this cache to store.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.BorrowToken(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Borrows a token wrapping an array of the given size.  
+            Creates a new one if one is not already present.
+            </summary>
+            <param name="height">The size of the height, or dimension 0.</param>
+            <param name="width">The size of the width, or dimension 1.</param>
+            <param name="exact">If false, a larger array will be returned if available.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.Borrow(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Borrows an array of the given size.  Creates a new one if one is not already present.
+            </summary>
+            <param name="height">The size of the height, or dimension 0.</param>
+            <param name="width">The size of the width, or dimension 1.</param>
+            <param name="exact">If false, a larger array will be returned if available.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.Return(`0[0:,0:])">
+            <summary>
+            Returns an array to the pool.  To return a token, simply dispose it.
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.Trim(System.Int64)">
+            <summary>
+            Trims the pool to contain no more than the provided number of elements.
+            Not threadsafe, only call within lock.
+            </summary>
+            <param name="desiredSize"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DPool`1.ToString">
+            <summary>
+            Returns a string representation of the object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DPool`1.Count">
+            <summary>
+            Returns the number of arrays stored in the pool.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DPool`1.CurrentSize">
+            <summary>
+            Returns the total number of elements in all the stored arrays.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DPool`1.MaximumSize">
+            <summary>
+            Gets or sets the maximum number of elements for this cache to store.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DPool`1.Enabled">
+            <summary>
+            If set to false, the pool will stop keeping arrays that are returned.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Array2DToken`1">
+            <summary>
+            An object that is capable of returning itself to a pool that created it.
+            </summary>
+            <typeparam name="Type"></typeparam>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DToken`1.#ctor(Microsoft.MapPoint.Utility.Array2DPool{`0},`0[0:,0:],System.Int32,System.Int32)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="owner"></param>
+            <param name="buffer"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DToken`1.Finalize">
+            <summary>
+            Destructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Array2DToken`1.Dispose">
+            <summary>
+            Returns the array to the owning pool.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.Length">
+            <summary>
+            The total number of elements that were borrowed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.Width">
+            <summary>
+            The number of elements borrowed in the second dimension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.Height">
+            <summary>
+            The number of elements borrowed in the first dimension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.Array">
+            <summary>
+            The borrowed buffer.  May be larger than the size requested -- elements beyond <see cref="P:Microsoft.MapPoint.Utility.Array2DToken`1.Length"/>
+            should be considered invalid.  Will be null if the token is disposed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.Item(System.Int32,System.Int32)">
+            <summary>
+            Indexer.
+            </summary>
+            <param name="index1">The index against Height.</param>
+            <param name="index2">The index against Width.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Array2DToken`1.IsDisposed">
+            <summary>
+            True if the token has been disposed already and the buffer returned to the pool.
+            <see cref="P:Microsoft.MapPoint.Utility.Array2DToken`1.Array"/> is still accessible, but is no longer safe to use.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ChunkedMemoryStream">
+            <summary>
+            A memory-backed stream that uses multiple small byte arrays instead of a single large one.
+            This class is not writable by standard Stream methods, but must be written to with <see cref="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.AddChunk(System.Byte[],System.Int32)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.#ctor">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.MapPoint.Utility.ChunkedMemoryStream"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Flush">
+            <summary>
+            Overrides System.IO.Stream.Flush() so that no action is performed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.ReadByte">
+            <summary>
+            Reads a byte from the current stream.
+            </summary>
+            <returns>The byte cast to a System.Int32, or -1 if the end of the stream has been reached.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a block of bytes from the current stream and writes the data to buffer.
+            </summary>
+            <param name="buffer">When this method returns, contains the specified byte array with the values
+                between offset and (offset + count - 1) replaced by the characters read from
+                the current stream.</param>
+            <param name="offset">The byte offset in buffer at which to begin reading.</param>
+            <param name="count">The maximum number of bytes to read.</param>
+            <returns>The total number of bytes written into the buffer. This can be less than
+                the number of bytes requested if that number of bytes are not currently available,
+                or zero if the end of the stream is reached before any bytes are read.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the current stream to the specified value.
+            </summary>
+            <param name="offset">The new position within the stream. This is relative to the origin parameter,
+                and can be positive or negative.</param>
+            <param name="origin">A value of type System.IO.SeekOrigin, which acts as the seek reference point.</param>
+            <returns>The new position within the stream, calculated by combining the initial reference point and the offset.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.SetLength(System.Int64)">
+            <summary>
+            Not supported.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Not supported.  Use <see cref="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.AddChunk(System.Byte[],System.Int32)"/>.
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.AddChunk(System.Byte[],System.Int32)">
+            <summary>
+            Adds a new chunk to the stream.  The stream takes ownership of the buffer, and it should not be modified after adding.
+            </summary>
+            <param name="buffer">The buffer to add.</param>
+            <param name="count">The number of bytes within buffer to add.  May be smaller that the size of the buffer.</param>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ChunkedMemoryStream.CanRead">
+            <summary>
+            Gets a value indicating whether the current
+                stream supports reading.  Returns true.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ChunkedMemoryStream.CanSeek">
+            <summary>
+            Gets a value indicating whether the current
+                stream supports seeking.  Returns true.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ChunkedMemoryStream.CanWrite">
+            <summary>
+            Gets a value indicating whether the current
+                stream supports writing.  Returns false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Length">
+            <summary>
+            Gets the length of the stream in bytes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Position">
+            <summary>
+            Gets or sets the current position within the stream.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Chunk.Data">
+            <summary>
+            The chunk data. May be larger than the specified length.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Chunk.Length">
+            <summary>
+            The size of the chunk.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ChunkedMemoryStream.Chunk.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            Create a data chunk from a specified array and size.
+            The supplied array may be larger than the actual chunk.
+            The data is not copied, only a reference is kept.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.UInt64RangeSet">
+            <summary>
+            A collection of ranges of uint64 values, held in sorted order.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.#ctor">
+            <summary>
+            Constructor for a set of distinct value ranges.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.#ctor(System.UInt64)">
+            <summary>
+            Constructor that will include new values in existing ranges if they are within the specified distance rather than create new ranges.
+            </summary>
+            <param name="includeDistance"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.#ctor(System.UInt64,System.Int32)">
+            <summary>
+            Constructor that will include new values in existing ranges if they are within the specified distance rather than create new ranges.
+            </summary>
+            <param name="includeDistance"></param>
+            <param name="initialRangeCount">The initial number of ranges to create storage for.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.GetCurrentRanges">
+            <summary>
+            Gets the current ranges that are in this set.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.Contains(System.UInt64)">
+            <summary>
+            Returns whether a value is in the set of ranges.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.ContainsAll(System.UInt64,System.UInt64)">
+            <summary>
+            Returns whether all values in the range is in the set of ranges.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.ContainsAny(System.UInt64,System.UInt64)">
+            <summary>
+            Returns whether any value in the range is in the set of ranges.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.Add(System.UInt64)">
+            <summary>
+            Adds a single value, adjusting the proper ranges as necessary.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.Add(System.UInt64,System.UInt64)">
+            <summary>
+            Adds range of values, adjusting the proper ranges as necessary.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.SafeAdd(System.UInt64,System.UInt64)">
+            <summary>
+            Adds two values, clamping at max value.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.SafeSubtract(System.UInt64,System.UInt64)">
+            <summary>
+            Subtracts two values, clamping at min value.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.ToString">
+            <summary>
+            ToString.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.UInt64RangeSet.CountRanges">
+            <summary>
+            Gets the number of rnages in the set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.UInt64RangeSet.CountValues">
+            <summary>
+            Gets the number of values in the set.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer">
+            <summary>
+            A small comparer class for finding grid ranges.  Sorter is used for sorting by FromGrid,
+            Intersector is used for searching for intersections between two ranges.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.Intersector">
+            <summary>
+            Gets an instance of this comparer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.Adjoiner">
+            <summary>
+            Gets an instance of this comparer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.#ctor(System.Byte)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.#ctor(System.UInt64)">
+            <summary>
+            Constructor for an adjoiner that looks more than one value away.
+            </summary>
+            <param name="adjoinDistance"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.CompareAdjoining(Microsoft.MapPoint.Utility.UInt64Range,Microsoft.MapPoint.Utility.UInt64Range)">
+            <summary>
+            Returns -1 if x is entirely before y, 1 if x is entirely after y, and 0 if they intersect or if they adjoin each other.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64RangeSet.UInt64RangeComparer.CompareIntersect(Microsoft.MapPoint.Utility.UInt64Range,Microsoft.MapPoint.Utility.UInt64Range)">
+            <summary>
+            Returns -1 if x is entirely before y, 1 if x is entirely after y, and 0 if they intersect.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.UInt64Range">
+            <summary>
+            A small class for handling ranges for uints.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.UInt64Range.From">
+            <summary>
+            The beginning of this range.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.UInt64Range.To">
+            <summary>
+            The end of this range.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.#ctor(System.UInt64,System.UInt64)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.ToString">
+            <summary>
+            ToString for debugging.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.Equals(System.Object)">
+            <summary>
+            Equality
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.Equals(Microsoft.MapPoint.Utility.UInt64Range)">
+            <summary>
+            Equals
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.GetHashCode">
+            <summary>
+            Hashcode.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.op_Equality(Microsoft.MapPoint.Utility.UInt64Range,Microsoft.MapPoint.Utility.UInt64Range)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.UInt64Range.op_Inequality(Microsoft.MapPoint.Utility.UInt64Range,Microsoft.MapPoint.Utility.UInt64Range)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ReusableList`1">
+            <summary>
+            This is a special class that implements part of the generic List.
+            List seems to recreate its base array every time it is cleared.
+            This list does not.
+            Warning, this list does not implement the exact API of List,
+            just the most common parts.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.#ctor(System.Int32)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="initialCount"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.#ctor(`0[])">
+            <summary>
+            Internal constructor for creating based on provided data array.
+            This is unsafe because the array is not copied.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.CreateUnsafe(`0[])">
+            <summary>
+            Creates the list using the provided array pointer.
+            This is unsafe because the array is not copied.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.AddRange(System.Collections.Generic.IList{`0})">
+            <summary>
+            Adds all elements from a List.
+            </summary>
+            <param name="range"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds all elements from an enumerable.
+            </summary>
+            <param name="range"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.AddRange(`0[],System.Int32,System.Int32)">
+            <summary>
+            Adds elements from an array.
+            </summary>
+            <param name="range"></param>
+            <param name="srcPos"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.SetRange(`0[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Replaces elements on the list. If the source range is larger than the destination array, the elements are automatically added
+            to the list.
+            </summary>
+            <param name="range"></param>
+            <param name="srcPos"></param>
+            <param name="dstPos"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Expand(System.Int32)">
+            <summary>
+            Expands the current count to the specified amount, filling in extra data with default values as necessary.
+            If needed is less than the current count, this does nothing.
+            </summary>
+            <param name="needed"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Sort">
+            <summary>
+            Sorts the contents of the array.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Sorts the contents of the array.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Add(`0)">
+            <summary>
+            Adds a single item to the end of the list.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Clear">
+            <summary>
+            Sets the list to empty.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Contains(`0)">
+            <summary>
+            True if the item is in the list.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the contents of the list to the array.
+            </summary>
+            <param name="array"></param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.CopyTo(`0[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            copies contents of the array
+            </summary>
+            <param name="dest"></param>
+            <param name="sourceIndex"></param>
+            <param name="destIndex"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Remove(`0)">
+            <summary>
+            Removes an item from the list.  Returns true if it is successful.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.GetEnumerator">
+            <summary>
+            Returns the items in the list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.IndexOf(`0)">
+            <summary>
+            Returns the index of the item, -1 if not present.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.Insert(System.Int32,`0)">
+            <summary>
+            Not implemented.  Use Add.
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes the item at the index from the list.
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.TrimExcess">
+            <summary>
+            Sets the capacity to the actual number of elements in the list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.AsReadOnly">
+            <summary>
+            Returns a read-only copy of this collection.
+            </summary>
+            <returns>A read-only copy of this List.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.GetInternalData">
+            <summary>
+            Gets the internal array.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ReusableList`1.ToString">
+            <summary>
+            ToString
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ReusableList`1.Count">
+            <summary>
+            Returns the number of items in the list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ReusableList`1.IsReadOnly">
+            <summary>
+            Returns false, this list is mutable.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ReusableList`1.Item(System.Int32)">
+            <summary>
+            Indexer.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ManagedSize">
+            <summary>
+            Encapsulates constants relating to calculating managed size.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.GuidSizeInBytes">
+            <summary>
+            The number of bytes consumed by a Guid struct.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.DateTimeSizeInBytes">
+            <summary>
+            The number of bytes consumed by a DateTime class.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.PointerInBytes">
+            <summary>
+            The number of bytes required for a pointer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.ObjectOverheadInBytes">
+            <summary>
+            The number of bytes of overhead that anything deriving from 
+            Object has (any class).
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.ArrayOverheadInBytes">
+            <summary>
+            The number of bytes of overhead that anything deriving from
+            Array has.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.StringOverheadInBytes">
+            <summary>
+            The number of bytes of overhead that any string has.
+            </summary>
+            <remarks>Taken from String.cs</remarks>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.HashtableOverheadInBytes">
+            <summary>
+            The number of bytes of overhead that a hashtable has.
+            </summary>
+            <remarks>Taken from Hashtable.cs.  Still a gross approximation.</remarks>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ManagedSize.VersionSizeInBytes">
+            <summary>
+            The number of bytes consumed by a Version class.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.IManagedSize">
+            <summary>
+            Provides a pattern for retrieving the managed size that will be released
+            when an object is garbage collected.
+            The objects that implement this should not include the size of
+            sub objects that they don't own (just the size of the pointers to them).
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.IManagedSize.CalculateSizeInBytes">
+            <summary>
+            Gets the size, in bytes, of the object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.SizeInBytesChanged">
+            <summary>
+            Handles when a IManagedSize object has changed size.
+            </summary>
+            <param name="changed">The object that changed size.</param>
+            <param name="delta">The amount it has changed.  A positive number means it got bigger, a negative
+            number means it got smaller.</param>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.IMutableManagedSize">
+            <summary>
+            Provides a pattern for allowing an IManagedSize object to report changes in
+            its own size.
+            </summary>
+        </member>
+        <member name="E:Microsoft.MapPoint.Utility.IMutableManagedSize.SizeInBytesChanged">
+            <summary>
+            Fired when the value of <see cref="M:Microsoft.MapPoint.Utility.IManagedSize.CalculateSizeInBytes"/> has changed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Int32FixedPoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.Multiplier">
+            <summary>
+            The conversion factor from double-precision floating-point numbers
+            to integer fixed-point values.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.UnitSize">
+            <summary>
+            The size of a fixed-point unit.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.MaxValue">
+            <summary>
+            Maximum value for this type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.MinValue">
+            <summary>
+            Minimum value for this type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.Fp0">
+            <summary>
+            Zero.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int32FixedPoint.Int32FixedPointValue">
+            <summary>
+            Gets or sets the integer fixed-point value directly.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.CreateFromInt32(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Int32FixedPoint"/> struct from and integer fixed point value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Int32FixedPoint"/> struct from a double.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_LessThan(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Less-than operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_GreaterThan(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Greater-than operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Subtraction(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Minus operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_UnaryNegation(Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Unary negate operator.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Addition(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Plus operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_LessThanOrEqual(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Less-than-or-equal-to operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_GreaterThanOrEqual(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Greater-than-or-equal-to operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Equality(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Inequality(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.Min(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.Max(Microsoft.MapPoint.Utility.Int32FixedPoint,Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Explicit(System.Double)~Microsoft.MapPoint.Utility.Int32FixedPoint">
+            <summary>
+            Explicit cast from double to Int32FixedPoint.
+            </summary>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.op_Explicit(Microsoft.MapPoint.Utility.Int32FixedPoint)~System.Double">
+            <summary>
+            Explicit cast from Int32FixedPoint to double.
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.Parse(System.String)">
+            <summary>
+            Parses a string, turning it into an Int32FixedPoint.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.Equals(Microsoft.MapPoint.Utility.Int32FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.ToString(System.IFormatProvider)">
+            <summary>
+            Gets a string representation of this object.
+            </summary>
+            <param name="formatProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int32FixedPoint.ToString">
+            <summary>
+            Gets a string representation of this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Int64FixedPoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.Multiplier">
+            <summary>
+            Double multiplier from number to fixed point.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.MaxValue">
+            <summary>
+            Maximum value for this type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.MinValue">
+            <summary>
+            Minimum value for this type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.Fp0">
+            <summary>
+            Zero.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.Fp1">
+            <summary>
+            One.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Int64FixedPoint.Int64FixedPointValue">
+            <summary>
+            Gets or sets the integer fixed-point value directly.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.CreateFromInt64(System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Int64FixedPoint"/> struct from and integer fixed point value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Int64FixedPoint"/> struct from a double.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_LessThan(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Less-than operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_GreaterThan(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Greater-than operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Subtraction(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Minus operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_UnaryNegation(Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Unary negate operator.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Addition(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Plus operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_LessThanOrEqual(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Less-than-or-equal-to operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_GreaterThanOrEqual(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Greater-than-or-equal-to operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Equality(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Inequality(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.Min(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.Max(Microsoft.MapPoint.Utility.Int64FixedPoint,Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Explicit(System.Double)~Microsoft.MapPoint.Utility.Int64FixedPoint">
+            <summary>
+            Explicit cast from double to Int64FixedPoint.
+            </summary>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Explicit(Microsoft.MapPoint.Utility.Int64FixedPoint)~System.Double">
+            <summary>
+            Explicit cast from Int64FixedPoint to double.
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Explicit(Microsoft.MapPoint.Utility.Int64FixedPoint)~System.Int32">
+            <summary>
+            
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Explicit(Microsoft.MapPoint.Utility.Int64FixedPoint)~Microsoft.MapPoint.Utility.Int32FixedPoint">
+            <summary>
+            
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.op_Explicit(Microsoft.MapPoint.Utility.Int32FixedPoint)~Microsoft.MapPoint.Utility.Int64FixedPoint">
+            <summary>
+            
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.Parse(System.String)">
+            <summary>
+            Parses a string, turning it into an Int64FixedPoint.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.Equals(Microsoft.MapPoint.Utility.Int64FixedPoint)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.ToString(System.IFormatProvider)">
+            <summary>
+            Gets a string representation of this object.
+            </summary>
+            <param name="formatProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Int64FixedPoint.ToString">
+            <summary>
+            Gets a string representation of this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.KeyName">
+            <summary>
+            Utility class for validating key names.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.KeyName.MinimumLength">
+            <summary>
+            The minimum allowed length of a key name, in characters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.KeyName.MaximumLength">
+            <summary>
+            The maximum allowed length of a key name, in characters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.Validate(System.String)">
+            <summary>
+            Checks that the key name is valid; throws an exception if not.
+            </summary>
+            <param name="keyName">The key name to validate.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.IsValidCharacter(System.Char)">
+            <summary>
+            Returns whether the specified character is allowed
+            in key names.
+            </summary>
+            <param name="character">The character to check.</param>
+            <returns>True if it is allowed in key names, false if not.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.IsValidInitialCharacter(System.Char)">
+            <summary>
+            Returns whether the specified character is allowed
+            to begin a key name.
+            </summary>
+            <param name="character">The character to check.</param>
+            <returns>True if it is allowed to begin a key name, false if not.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.AssertValid(System.String)">
+            <summary>
+            Debug-only method that asserts that the key name is valid.
+            </summary>
+            <param name="keyName">The key name to validate.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.IsValid(System.String)">
+            <summary>
+            Returns whether the specified key name is valid.
+            </summary>
+            <param name="keyName">The key name to validate.</param>
+            <returns>True if valid, false if not.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.Compare(System.String,System.String)">
+            <summary>
+            Compares two key names.  Assumes they're valid.
+            </summary>
+            <param name="keyName1"></param>
+            <param name="keyName2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.ValidateArgument(System.String,System.String)">
+            <summary>
+            Internal method provided as a helper for the Validate class.
+            </summary>
+            <param name="keyName"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.IsValidLength(System.String)">
+            <summary>
+            Gets whether the key name is a valid length.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.KeyName.InvalidCharacterIndex(System.String)">
+            <summary>
+            Looks for invalid characters. Returns the index of the first
+            one found, or notFound if all characters in the string are valid.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Limit">
+            <summary>
+            Some miscellaneous number crunching static methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Limit.Read(System.Double,System.Double,System.Double,System.Boolean,System.Double,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Processes an incoming value, limiting it to the specified range, 
+            and dealing with NaNs.  A message is logged if the value is out of
+            range.
+            </summary>
+            <param name="incoming"></param>
+            <param name="defaultValue"></param>
+            <param name="minimumValidValue"></param>
+            <param name="minimumInclusive"></param>
+            <param name="maximumValidValue"></param>
+            <param name="maximumInclusive"></param>
+            <param name="acceptNan"></param>
+            <param name="outOfRangeMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Logging">
+            <summary>
+            Very simple file logging class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.Start(System.String,System.String,System.String,System.Int32,Microsoft.MapPoint.Utility.Logging.Level)">
+            <summary>
+            Starts logging to the file specified.  Will be created if it does not exist.  
+            Combined path is path + pattern + fileName.  Will keep the count newest files
+            at path that match pattern.
+            </summary>
+            <param name="path">The directory path to place the file in.</param>
+            <param name="fileName">The name of the file to use.</param>
+            <param name="pattern">A prefix to use for the name.</param>
+            <param name="count">The max number of files to keep that use the same prefix.  Zero or negative indicates to not limit the number of files kept.</param>
+            <param name="logLevel">Only logs greater than or equal to this level will be made.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.Start(System.IO.StreamWriter)">
+            <summary>
+            Starts logging to the writer specified.
+            </summary>
+            <param name="writer">The file/stream to write logs to.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.Stop">
+            <summary>
+            Stops writing to the current file and closes it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteLine(System.String)">
+            <summary>
+            Log the string to the event log.
+            </summary>
+            <param name="logMessage">The message to write.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteLine(System.String,Microsoft.MapPoint.Utility.Logging.Level)">
+            <summary>
+            Log the string to the event log.
+            </summary>
+            <param name="logMessage">The message to write.</param>
+            <param name="logLevel">The severity of the message.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteLine(System.Object)">
+            <summary>
+            Log the string representation of the object.
+            </summary>
+            <param name="o">Object to log.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteException(System.Exception)">
+            <summary>
+            Logs the exception to the event log.
+            </summary>
+            <param name="e">The exception to log.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteException(System.Exception,System.String)">
+            <summary>
+            Logs the exception to the event log.
+            </summary>
+            <param name="e">The exception to log.</param>
+            <param name="message">An additional message to display with the exception.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteException(System.Exception,System.String,Microsoft.MapPoint.Utility.Logging.Level)">
+            <summary>
+            Logs the exception to the event log.
+            </summary>
+            <param name="e">The exception to log.</param>
+            <param name="message">An additional message to display with the exception.  Null indicates no additional message.</param>
+            <param name="logLevel">The severity of the exception.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Logging.WriteLine(System.Object,Microsoft.MapPoint.Utility.Logging.Level)">
+            <summary>
+            Log the string representation of the object.
+            </summary>
+            <param name="o">Object to log.</param>
+            <param name="logLevel">The severity of the object message.</param>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Logging.Enabled">
+            <summary>
+            Gets whether messages are currently being sent to the log.  May be false if no backing stream or file
+            was indicated (ie Start was not called or improperly called) or that an error was encountered with
+            the stream or file.  Logging may be restarted using the same writer by calling Logging.Start(Logging.Writer).
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Logging.LoggingLevel">
+            <summary>
+            Gets/Sets the logging level.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Logging.Started">
+            <summary>
+            Returns whether logging has been started
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Logging.Writer">
+            <summary>
+            Gets the writer in use.  Null if logging has not been started.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Logging.Level">
+            <summary>
+            Level of logging information
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Logging.Level.Critical">
+            <summary>
+            Reserved for critical failures.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Logging.Level.Warning">
+            <summary>
+            Reserved for error messages that can be handled by the system.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Logging.Level.Informational">
+            <summary>
+            Reserved for logging issues that represent the valid state of the control
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Logging.Level.None">
+            <summary>
+            No logging will be performed
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.Logging.Level.Internal">
+            <summary>
+            Internal debug only logging.  Same as informational, but does nothing in public builds.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.NameFilterRules">
+            <summary>
+            Represents a set of rules that may be used to match names in an entity name query.
+            Derived class NameFilterRulesCustom has greater functionality.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.NameFilterRules.PerfectScore">
+            <summary>
+            The value of a perfect score.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.NameFilterRules.WorstPossibleScore">
+            <summary>
+            The value of the worst possible score.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.NameFilterRules.#ctor(Microsoft.MapPoint.Utility.NameFilterRulesType)">
+            <summary>
+            A ctor that defines type only.  Must use a derived class, such as NameFilterRulesCustom, to use 
+            the Score or NameFilterRulesType.Custom features.
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.NameFilterRules.Score(System.String,System.String,Microsoft.MapPoint.Utility.StartsWith,System.Globalization.CultureInfo,System.Double)">
+            <summary>
+            Gets the match score for the specified two strings using these rules.
+            </summary>
+            <param name="searchString">A string.</param>
+            <param name="candidateString">Another string.</param>
+            <param name="startsWith">Whether to allow the candidateString to just start with the search string without penalty.</param>
+            <param name="culture">The culture to compare these strings in.</param>
+            <param name="thresholdScore">The minimum score to accept for these strings.  Any score less than this does not match.  A higher value here may improve performance.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.NameFilterRules.Type">
+            <summary>
+            The type of rule set this is.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.StartsWith">
+            <summary>
+            If On, scoring will be based on whether the name searched for matches the start of an entity name.
+            If Off, scoring will be based on matching the entire string.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.StartsWith.On">
+            <summary>
+            Scoring will be based on whether the name matches the start of an entity name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.StartsWith.Off">
+            <summary>
+            Scoring will be based on whether the name matches the entire entity name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.NameFilterRulesType">
+            <summary>
+            The possible types of name rules we might have.  The predefined are fuzzy and exact, the last is specified by the user.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.NameFilterRulesType.Fuzzy">
+            <summary>
+            A set of predefined rules that attempt to match strings by accounting for misspelling and other common mistakes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.NameFilterRulesType.CaseInsensitive">
+            <summary>
+            A set of predefined rules that attempt to match strings by ignoring case.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.NameFilterRulesType.Custom">
+            <summary>
+            A set of rules defined by character maps provided by the user.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Opacity">
+            <summary>
+            Encapsulates movement between opacities.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Opacity.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Opacity"/> class.
+            </summary>
+            <param name="maximum">The "visible" opacity value (between 0 and 1).</param>
+            <param name="minimum">The "non-visible" opacity value (between 0 and 1).</param>
+            <param name="secondsBeforeFadingIn">The number of seconds to wait if non-visible and fading to visible.</param>
+            <param name="secondsToFadeIn">The number of seconds to fade from non-visible to visible.</param>
+            <param name="secondsBeforeFadingOut">The number seconds to wait if visible and fading to non-visible.</param>
+            <param name="secondsToFadeOut">The number of seconds to fade from visible to non-visible.</param>
+            <param name="startingVisibility">If true, starts in "visible" state, if false in "non-visible".</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Opacity.NextFrame(System.Int64)">
+            <summary>
+            Updates the current opacity value, moving toward maximum or minimum if necessary.
+            </summary>
+            <param name="tickCount">100 nanosecond ticks.</param>
+            <returns>True if the opacity value changed.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Opacity.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Opacity.Maximum">
+            <summary>
+            Gets or sets the "visible" opacity value (between 0 and 1).
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Opacity.Minimum">
+            <summary>
+            Gets or sets the "non-visible" opacity value (between 0 and 1).
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Opacity.Current">
+            <summary>
+            Gets or sets the current opacity value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Opacity.Visible">
+            <summary>
+            Gets or sets whether the current opacity is visible (Maximum) or not visible (Minimum).
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Pair`2">
+            <summary>
+            Encapsulates a pair of objects.  This is a convenience for things like 
+            a list of pairs where the pairs are not necessarily a KeyValuePair.
+            </summary>
+            <typeparam name="TA"></typeparam>
+            <typeparam name="TB"></typeparam>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Pair`2.#ctor(`0,`1)">
+            <summary>
+            Initializes an instance of the Pair struct.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Pair`2.GetHashCode">
+            <summary>
+            Gets the hash code for this pair.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Pair`2.Equals(Microsoft.MapPoint.Utility.Pair{`0,`1})">
+            <summary>
+            Determines the equality of this pair with another pair.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Pair`2.Equals(System.Object)">
+            <summary>
+            Determines the equality of this pair with another pair.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Pair`2.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Pair`2.A">
+            <summary>
+            Gets the first entry in the pair.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.Pair`2.B">
+            <summary>
+            Gets the second entry in the pair.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Progress">
+            <summary>
+            Encapsulates a call-back mechanism for reporting percentage progress 
+            completion.
+            Also supports a stack of "areas" for more detailed tracking of 
+            sub-sections of the percentage calculations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Progress.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.MapPoint.Utility.Progress"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Progress.Reset">
+            <summary>
+            Reset progress system so things can be re-initialized
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Progress.Update(System.Single,System.String)">
+            <summary>
+            Updates the percent complete for the current area.
+            </summary>
+            <param name="percentComplete"></param>
+            <param name="nextStepDescription"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Progress.EnterArea(System.Single,System.String,System.Single)">
+            <summary>
+            Enters a new progress area, specifying the range that that area 
+            represents.
+            </summary>
+            <param name="percentComplete"></param>
+            <param name="nextStepDescription"></param>
+            <param name="endPercentComplete"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.Progress.ExitArea">
+            <summary>
+            Exits a progress area.  There should be one of these for each enter.
+            </summary>
+        </member>
+        <member name="E:Microsoft.MapPoint.Utility.Progress.ProgressChanged">
+            <summary>
+            Suscribe to this event to get notification of changes in the 
+            progress percentage.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Progress.ProgressChangedEventHandler">
+            <summary>
+            Callback delegate.
+            </summary>
+            <param name="percentComplete"></param>
+            <param name="nextStepDescription"></param>
+        </member>
+        <member name="T:Microsoft.MapPoint.Validation.Validate">
+            <summary>
+            Provides methods for validating parameters in consistent fashion.
+            All methods return void, and throw exceptions if the requisite
+            conditions are not met.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.BuildFullArgument(System.String,System.Int32,System.String)">
+            <summary>
+            Builds a full argument name from the pieces of an indexed argument.
+            For example, if argumentName="myArgument", and argumentIndex=3, and
+            suffix=".MyProperty", then the result is 
+            "myArgument[3].MyProperty".  Note that a negative argumentIndex 
+            will remove the brackets.
+            </summary>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.BuildFullArgument(System.String,System.Int32)">
+            <summary>
+            Builds a full argument name from the pieces of an indexed argument.
+            For example, if argumentName="myArgument", and argumentIndex=3, then the result is 
+            "myArgument[3]".  Note that a negative argumentIndex will remove the brackets.
+            </summary>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotNull(System.Object,System.String)">
+            <summary>
+            Validates that the argument is not null.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the argument is null.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotNull(System.Object,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that an indexed argument is not null.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotEmpty(System.Collections.ICollection,System.String,System.Boolean)">
+            <summary>
+            Validates that the collection is non-null and contains at least one item.
+            Optionally ensures that the collection contains no nulls.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="prohibitNulls">If true, the elements of the collection will be checked to ensure they do not have null values.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the argument is null, or if prohibitNulls is true and the collection contains a null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the argument contains zero elements.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotEmptyGeneric``1(System.Collections.Generic.ICollection{``0},System.String,System.Boolean)">
+            <summary>
+            Validates that the collection is non-null and contains at least one item.
+            Optionally ensures that the collection contains no nulls.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="prohibitNulls">If true, the elements of the collection will be checked to ensure they do not have null values.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the argument is null, or if prohibitNulls is true and the collection contains a null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the argument contains zero elements.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.ValidateUriHttpString(System.String,System.String)">
+            <summary>
+            Validates that the supplied value is an Http request string
+            </summary>
+            <param name="testValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.ValidateUriHttp(System.Uri,System.String)">
+            <summary>
+            Validates that the supplied value is an Http request Uri
+            </summary>
+            <param name="testValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsValidUriHttpString(System.String)">
+            <summary>
+            Validates that the supplied value is an Http request string
+            </summary>
+            <param name="testValue"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsValidUriHttp(System.Uri)">
+            <summary>
+            Validates that the supplied value is an Http request string
+            </summary>
+            <param name="testValue"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.AssertIsNotEmpty(System.Collections.ICollection,System.Boolean)">
+            <summary>
+            Asserts that the collection is non-null and contains at least one item.
+            Optionally ensures that the collection contains no nulls.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="prohibitNulls">If true, the elements of the collection will be checked to ensure they do not have null values.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.ContainsNoNulls(System.Collections.ICollection,System.String)">
+            <summary>
+            Validates that the collection is non-null and contains no nulls.
+            The collection is allowed to contain zero items.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the collection is null, or if the collection contains a null.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.ContainsNoNullsGeneric``1(System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+            Validates that the collection is non-null and contains no nulls.
+            The collection is allowed to contain zero items.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the collection is null, or if the collection contains a null.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.AssertContainsNoNulls(System.Collections.ICollection)">
+            <summary>
+            Asserts that the collection is non-null and contains no nulls.
+            The collection is allowed to contain zero items.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsCollectionOfType(System.Collections.ICollection,System.String,System.Type,System.Boolean)">
+            <summary>
+            Validates that the collection is non-null and contains no objects that
+            aren't of the specified type. The collection is allowed to contain
+            zero items.
+            </summary>
+            <param name="argument">The collection to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="requiredType">The required type of the collection.</param>
+            <param name="prohibitNulls">If true, the elements of the collection will be checked to ensure they do not have null values.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the collection is null, or if the collection contains a null and prohibitNulls is true.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if a member of the collection is not of the required type.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.AssertIsCollectionOfType(System.Collections.ICollection,System.Type,System.Boolean)">
+            <summary>
+            Asserts that the collection is non-null and contains no objects that
+            aren't of the specified type. The collection is allowed to contain
+            zero items.
+            </summary>
+            <param name="argument">The collection to check.</param>
+            <param name="requiredType">The required type of the collection.</param>
+            <param name="prohibitNulls">If true, the elements of the collection will be checked to ensure they do not have null values.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotEmpty(System.String,System.String)">
+            <summary>
+            Validates that the string is neither null nor empty.
+            </summary>
+            <param name="argument">The string to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the argument is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the argument is an empty string.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.AssertIsNotEmpty(System.String)">
+            <summary>
+            Asserts that the string is neither null nor empty.
+            </summary>
+            <param name="argument">The string to validate.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsValidEnumValue(System.Enum,System.String)">
+            <summary>
+            Validate that the specified enum value is a legitimate one.
+            Call only for enumerated types that do NOT have the Flags attribute.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception>System.ComponentModel.InvalidEnumArgumentException Thrown if the enum value is undefined.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsValidFlagsEnumValue(System.Enum,System.String)">
+            <summary>
+            Validate that the specified enum value is a legitimate one.
+            NOTE: Call only for enumerated types that have the Flags attribute.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the enum value is undefined.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsType(System.Object,System.Type,System.Boolean,System.String)">
+            <summary>
+            Validate that argument is either null or of the specified type. 
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="type">The required type of the argument.</param>
+            <param name="allowNull">Whether the method should allow null (refrain from throwing if arugment is null).</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the argument is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the argument is non-null and not of the required type.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsType(System.Object,System.Type,System.Boolean,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that an indexed argument is either null or of the specified type.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="type"></param>
+            <param name="allowNull"></param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsEqualTo(System.Object,System.Object,System.String)">
+            <summary>
+            Validates that an argument is equal to a specified object.  All 
+            types are compared using the Equals method.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsNotEqualTo(System.Object,System.Object,System.String)">
+            <summary>
+            Validates that an argument is not equal to a specified object.  All
+            types are compared using the Equals method.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.EntryCountGreaterThan(System.Collections.ICollection,System.Int32,System.String)">
+            <summary>
+            Validates that a collection argument has more entries than the specified number.
+            </summary>
+            <param name="argument"></param>
+            <param name="comparisonValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.EntryCountGreaterThanOrEqual(System.Collections.ICollection,System.Int32,System.String)">
+            <summary>
+            Validates that a collection argument has at least the number of entries specified.
+            </summary>
+            <param name="argument"></param>
+            <param name="comparisonValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.HaveSameCount(System.Collections.ICollection,System.Collections.ICollection,System.String,System.String)">
+            <summary>
+            Validates that two collections are the same length.
+            </summary>
+            <param name="argument1"></param>
+            <param name="argument2"></param>
+            <param name="argument1Name"></param>
+            <param name="argument2Name"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsWithinArrayBounds(System.Int32,System.Collections.IList,System.String)">
+            <summary>
+            Validates that an index is within the bounds of an array.
+            </summary>
+            <param name="index">The argument to validate.</param>
+            <param name="array">The array whose bounds to use.</param>
+            <param name="argumentName">The name of the argument (the index, not the array!)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the index is outside the array bounds.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsValidKeyName(System.String,System.String)">
+            <summary>
+            Validates that a key name is valid.
+            </summary>
+            <param name="keyName">The key name to validate.</param>
+            <param name="argumentName">The name of the argument.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentException(System.String,System.String)">
+            <summary>
+            Returns an argument exception that can be thrown.
+            </summary>
+            <param name="errorMessage">Detailed error message.</param>
+            <param name="argumentName">The name of the argument that caused the exception.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentException(System.String,System.String,System.Int32)">
+            <summary>
+            Returns an argument exception that can be thrown.
+            </summary>
+            <param name="errorMessage"></param>
+            <param name="argumentName"></param>
+            <param name="argumentIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentException(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Returns an argument exception that can be thrown.
+            </summary>
+            <param name="errorMessage"></param>
+            <param name="argumentName"></param>
+            <param name="argumentIndex"></param>
+            <param name="argumentSuffix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentException(System.String,System.String,System.Object)">
+            <summary>
+            Throw an argument exception.  It adds the argumentValue into the Message string.
+            </summary>
+            <param name="errorMessage"></param>
+            <param name="argumentName"></param>
+            <param name="argumentValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentNullException(System.String)">
+            <summary>
+            Returns an argument null exception.
+            </summary>
+            <param name="argumentName">The name of the argument that caused the exception.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentOutOfRangeException(System.String,System.Object,System.String)">
+            <summary>
+            Throw an argument-out-of-range exception.
+            </summary>
+            <param name="argumentName">The name of the argument that caused the exception.</param>
+            <param name="argumentValue">The value of the argument that caused the exception.</param>
+            <param name="errorMessage">Detailed error message.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentTypeException(System.Type,System.String)">
+            <summary>
+            Gets an exception to throw for an wrong type.
+            </summary>
+            <param name="type">The expected type of the argument.</param>
+            <param name="argumentName">The name of the argument that caused the exception.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetArgumentTypeException(System.String)">
+            <summary>
+            Gets an exception to throw for an wrong type.
+            </summary>
+            <param name="argumentName">The name of the argument that caused the exception.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetNotImplementedException">
+            <summary>
+            Throw a not-implemented exception.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetInvalidEnumException(System.Enum,System.String)">
+            <summary>
+            Gets an exception that can be thrown to indicate an invalid enum.
+            </summary>
+            <param name="argument"></param>
+            <param name="argumentName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.GetInvalidFlagsEnumException(System.Enum,System.String)">
+            <summary>
+            Gets an exception that can be thrown to indicate an invalid flags enum.
+            </summary>
+            <param name="argument"></param>
+            <param name="argumentName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThan(System.IComparable,System.IComparable,System.String)">
+            <summary>
+            Validates that the argument is greater than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThan(System.IComparable,System.IComparable,System.String,System.Int32)">
+            <summary>
+            Validates that the indexed argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThan(System.IComparable,System.IComparable,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that the indexed argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.IComparable,System.IComparable,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.IComparable,System.IComparable,System.String,System.Int32)">
+            <summary>
+            Validates that the indexed argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.IComparable,System.IComparable,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that the indexed argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.IComparable,System.IComparable,System.String,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="comparisonArgumentName">The name of the comparison argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThan(System.IComparable,System.IComparable,System.String)">
+            <summary>
+            Validates that the argument is lesser than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThan(System.IComparable,System.IComparable,System.String,System.Int32)">
+            <summary>
+            Validates that the indexed argument is less than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThan(System.IComparable,System.IComparable,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that the indexed argument is less than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThanOrEqualTo(System.IComparable,System.IComparable,System.String)">
+            <summary>
+            Validates that the argument is lesser than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThanOrEqualTo(System.IComparable,System.IComparable,System.String,System.Int32)">
+            <summary>
+            Validates that the indexed argument is less than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThanOrEqualTo(System.IComparable,System.IComparable,System.String,System.Int32,System.String)">
+            <summary>
+            Validates that the indexed argument is less than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument excluding anything from the square brackets on.</param>
+            <param name="argumentIndex">Either the index of the property, or a value less than 0 indicating the argument is not actually indexed.</param>
+            <param name="argumentSuffix">The name of the argument after the square brackets for the index.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsWithinRangeInclusive(System.IComparable,System.IComparable,System.IComparable,System.String)">
+            <summary>
+            Validates that the argument is within the specified range inclusively.
+            </summary>
+            <param name="argument"></param>
+            <param name="comparisonLowestValue"></param>
+            <param name="comparisonHighestValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThan(System.Int32,System.Int32,System.String)">
+            <summary>
+            Validates that the argument is greater than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.Int32,System.Int32,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="comparisonArgumentName">The name of the comparison argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThan(System.Int32,System.Int32,System.String)">
+            <summary>
+            Validates that the argument is lesser than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThanOrEqualTo(System.Int32,System.Int32,System.String)">
+            <summary>
+            Validates that the argument is lesser than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsWithinRangeInclusive(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Validates that the argument is within the specified range inclusively.
+            </summary>
+            <param name="argument"></param>
+            <param name="comparisonLowestValue"></param>
+            <param name="comparisonHighestValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThan(System.Double,System.Double,System.String)">
+            <summary>
+            Validates that the argument is greater than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.Double,System.Double,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsGreaterThanOrEqualTo(System.Double,System.Double,System.String,System.String)">
+            <summary>
+            Validates that the argument is greater than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <param name="comparisonArgumentName">The name of the comparison argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThan(System.Double,System.Double,System.String)">
+            <summary>
+            Validates that the argument is lesser than the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsLessThanOrEqualTo(System.Double,System.Double,System.String)">
+            <summary>
+            Validates that the argument is lesser than or equal to the comparison value.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <param name="comparisonValue">The value to which to compare it.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the argument is out of range.</exception>
+        </member>
+        <member name="M:Microsoft.MapPoint.Validation.Validate.IsWithinRangeInclusive(System.Double,System.Double,System.Double,System.String)">
+            <summary>
+            Validates that the argument is within the specified range inclusively.
+            </summary>
+            <param name="argument"></param>
+            <param name="comparisonLowestValue"></param>
+            <param name="comparisonHighestValue"></param>
+            <param name="argumentName"></param>
+        </member>
+        <member name="P:Microsoft.MapPoint.Validation.Validate.AssertOnFailure">
+            <summary>
+            Assertions are not enabled for configurations other than Debug
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.VersionUtility">
+            <summary>
+            Utility class for incrementing version numbers
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.VersionUtility.NextVersion(System.Version)">
+            <summary>
+            Get an incremented version.
+            </summary>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.VersionUtility.IncrementMinorVersion(System.Version)">
+            <summary>
+            Increments the minor version.
+            </summary>
+            <param name="original"></param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.VersionUtility.IncrementMajorVersion(System.Version)">
+            <summary>
+            Increments the minor version.
+            </summary>
+            <param name="original"></param>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ZipArchive">
+            <summary>
+            Class for creating and opening a zip file archive.
+            </summary>
+            <example>
+            The following example demonstrates how to open an existing zip archive, add a file to it and save it back.
+            <code>
+            ZipArchive zipArchive = new ZipArchive("existingArchive.zip");
+            ZipEntry newFileEntry = ZipEntry.CreateFromFile(@"C:\\newFile.txt", "newFileInArchive.txt");
+            zipArchive.Entries.Add(newFileEntry);
+            zipArchive.Write("updatedArchive.zip");
+            </code>
+            </example>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipArchive.entries">
+            <summary>
+            The enteries in the zip archive.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.#ctor">
+            <summary>
+            Create a new zip archive.
+            To populate the archive create and add new ZipEntries.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.#ctor(System.String)">
+            <summary>
+            Open a zip archive from a file.
+            </summary>
+            <param name="archiveFilename">Archive filename to open</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.#ctor(System.IO.Stream)">
+            <summary>
+            Open a zip archive from a archiveStream.
+            </summary>
+            <param name="archiveStream">Archive stream to read from</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.Write(System.IO.Stream)">
+            <summary>
+            Pack and write the archive to the specified archiveStream.
+            </summary>
+            <param name="archiveStream">Output stream for the archive.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.Write(System.String)">
+            <summary>
+            Pack and write the archive to the specified filename.
+            </summary>
+            <param name="outputFilename">Output filename for the archive.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.Unpack(System.IO.Stream)">
+            <summary>
+            Unpacks an archive from a stream into a list of zip entries.
+            </summary>
+            <param name="archiveStream">Archive stream to unpack from.</param>
+            <returns>List of all the entries in the archive.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipArchive.Pack(System.Collections.Generic.List{Microsoft.MapPoint.Utility.ZipEntry},System.IO.Stream)">
+            <summary>
+            Packs the listed entries into a single archive, written to the specified stream.
+            </summary>
+            <param name="entries">List of entries to pack.</param>
+            <param name="archiveStream">Stream to write the resulting archive.</param>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipArchive.Entries">
+            <summary>
+            Returns the list of entries in the archive.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.CompressionMethod">
+            <summary>
+            Compression method constants. Defines the algorithm used to compress a file.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.Stored">
+            <summary>
+            Stored (uncompressed)
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.Shrunk">
+            <summary>
+            Shrunk compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.ReducedCompressionFactor1">
+            <summary>
+            Reduced compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.ReducedCompressionFactor2">
+            <summary>
+            Reduced compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.ReducedCompressionFactor3">
+            <summary>
+            Reduced compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.ReducedCompressionFactor4">
+            <summary>
+            Reduced compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.Imploded">
+            <summary>
+            Imploded compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.Deflated">
+            <summary>
+            Deflated compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionMethod.Deflate64">
+            <summary>
+            Deflate64 compression method.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.CompressionLevel">
+            <summary>
+            Compression level method. Defines the amount of compression applied to the data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionLevel.Normal">
+            <summary>
+            Normal compression level.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionLevel.Maximum">
+            <summary>
+            Maximum compression level.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionLevel.Fast">
+            <summary>
+            Fast compression level.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.CompressionLevel.SuperFast">
+            <summary>
+            Super fast compression level.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ZipEntry">
+            <summary>
+            A single file entry in a zip archive.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.lastModified">
+            <summary>
+            Last modified date and time.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.compressionMethod">
+            <summary>
+            Compression method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.crc32">
+            <summary>
+            CRC32 hashcode of the uncompressed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.compressedSize">
+            <summary>
+            Length of compressed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.uncompressedSize">
+            <summary>
+            Length of uncompressed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.compressedData">
+            <summary>
+            Compressed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.uncompressedData">
+            <summary>
+            Uncompressed data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.filename">
+            <summary>
+            Filename.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.compressionLevel">
+            <summary>
+            Compression level.
+            </summary>
+        </member>
+        <member name="F:Microsoft.MapPoint.Utility.ZipEntry.fileAttributes">
+            <summary>
+            File attributes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor">
+            <summary>
+            Internal ctor for Decompression.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor(System.String,System.Byte[])">
+            <summary>
+            Create a ZipEntry with default last modified time and attribute.
+            </summary>
+            <param name="entityFileName">Filename in the archive</param>
+            <param name="data">File data</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor(System.String,System.Byte[],System.DateTime)">
+            <summary>
+            Create a ZipEntry with specific last modified time and default attribute.
+            </summary>
+            <param name="entityFileName">Filename in the archive</param>
+            <param name="data">File data</param>
+            <param name="lastModified">Last modified time</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor(System.String,System.Byte[],System.DateTime,System.IO.FileAttributes)">
+            <summary>
+            Create a ZipEntry with specified last modified time and attribute. 
+            </summary>
+            <param name="entityFileName">Filename in the archive</param>
+            <param name="data">File data</param>
+            <param name="lastModified">Last modified time</param>
+            <param name="fileAttributes">File attribute</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor(System.String)">
+            <summary>
+            Create a ZipEntry for a directory inside the archive with a default last modified time.
+            </summary>
+            <param name="directoryName">Directory name in the archive</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.#ctor(System.String,System.DateTime)">
+            <summary>
+            Create a ZipEntry for a directory inside the archive with a specified last modified time.
+            </summary>
+            <param name="directoryName">Directory name in the archive</param>
+            <param name="lastModified">Last modified time</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.CreateFromFile(System.String,System.String)">
+            <summary>
+            Create a ZipEntry from file, copying over the last modified time and the attribute.
+            Can be used on both files or directories.
+            </summary>
+            <param name="filename">Filename create entry from</param>
+            <param name="filenameInArchive">Name of the entry in the archive</param>
+            <returns>The new ZipEntry</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.CheckCRC">
+            <summary>
+            Checks the calculated uncompressed data CRC against the stored CRC, returns true if equal.
+            </summary>
+            <returns>True if CRC is valid.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.CalcCRC(System.Byte[])">
+            <summary>
+            Calculates the crc32 for the specified data.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.Inflate(System.Byte[],System.Int64)">
+            <summary>
+            Inflates (uncompresses) the specified compressed data.
+            </summary>
+            <param name="compressedData">Compressed data to deflate</param>
+            <param name="uncompressedSize">Expected uncompressed size</param>
+            <returns>Inflated (uncompressed) data.</returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipEntry.Deflate(System.Byte[])">
+            <summary>
+            Deflates (compresses) the specified data.
+            </summary>
+            <param name="uncompressedData">Data to inflate (compress).</param>
+            <returns>Deflated (compressed) data.</returns>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.FileAttributes">
+            <summary>
+            The file attributes.
+            </summary>
+            <see cref="T:System.IO.FileAttributes"/>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.CompressionLevel">
+            <summary>
+            The compression level.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.LastModified">
+            <summary>
+            Last modified time.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.FileName">
+            <summary>
+            Filename.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.CompressionMethod">
+            <summary>
+            Compression method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.UncompressedSize">
+            <summary>
+            Uncompressed size.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.CompressedSize">
+            <summary>
+            Compressed size.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.Crc32">
+            <summary>
+            Crc32 checksum.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.IsDirectory">
+            <summary>
+            True if this entry represents a directory, false otherwise.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.IsCompressed">
+            <summary>
+            True if this file is compressed, false if it is stored without compression.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.UncompressedData">
+            <summary>
+            The uncompressed data as a byte array.
+            </summary>
+        </member>
+        <member name="P:Microsoft.MapPoint.Utility.ZipEntry.UncompressedDataStream">
+            <summary>
+            The uncompressed data as a stream.
+            </summary>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ZipException">
+            <summary>
+            Zip related exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipException.#ctor">
+            <summary>
+            Initializes a new instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance with a specified error message.
+            </summary>
+            <param name="errorMessage">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance with a specified error message and a reference to the inner
+            exception that is the cause of this exception.
+            </summary>
+            <param name="errorMessage">The error message that explains the reason for the exception.</param>
+            <param name="exception">The exception that is the cause of the current exception, or a null reference
+             (Nothing in Visual Basic) if no inner exception is specified.
+            </param>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.ZipUtil">
+            <summary>
+            Utility calls.
+            </summary>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetStringFromBytes(System.Byte[])">
+            <summary>
+            Converts a byte array into a string.
+            </summary>
+            <param name="buf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetInt(System.Byte[],System.Int32)">
+            <summary>
+            returns int represented by buf[offset] to buf [offfset + 1]
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetBytesFromInt(System.Int32)">
+            <summary>
+            Converts an integer into binary that can be persisted into the binary archiveStream.
+            </summary>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetLong(System.Byte[],System.Int32)">
+            <summary>
+            Returns long represented by buf[offset] to buf [offfset + 3]
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetBytesFromLong(System.Int64)">
+            <summary>
+            Converts a long into binary that can be persisted into the binary archiveStream.
+            </summary>
+            <param name="l"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetTime(System.Byte[],System.Int32)">
+            <summary>
+            Converts MS-DOS date and time format to UTC format.
+            MS-DOS date and time are represented by buf [offset] to buf [offset + 3]
+            made internal, do avoid code duplication in ZipFile
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.MapPoint.Utility.ZipUtil.GetBytesFromTime(System.DateTime)">
+            <summary>
+            Converts a DateTime object into binary that can be persisted into the binary archiveStream.
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.MapPoint.Utility.Crc32Checksum">
+            <summary>
+            Computes a Crc32-32 Checksum based on the magic number 0xdebb20e3.
+            </summary>
+        </member>
+    </members>
+</doc>

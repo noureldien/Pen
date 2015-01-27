@@ -1,0 +1,96 @@
+﻿<Window x:Class="Pen.Intro.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window2" Height="388" Width="578" 
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+    <Grid>
+        <telerik:RadTileView x:Name="tileView1" Margin="128,24,97,12"
+				TileStateChangeTrigger="SingleClick" MinimizedColumnWidth="180" TileStateChanged="tileView1_TileStateChanged">
+            <telerik:RadTileView.ItemContainerStyle>
+                <Style TargetType="telerik:RadTileViewItem">
+                    <Setter Property="MinimizedHeight" Value="155" />
+                </Style>
+            </telerik:RadTileView.ItemContainerStyle>
+            <telerik:RadTileView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </telerik:RadTileView.ItemTemplate>
+            <telerik:RadTileView.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <telerik:RadFluidContentControl SmallToNormalThreshold="190, 140"
+								NormalToSmallThreshold="190, 140" NormalToLargeThreshold="320, 320"
+								LargeToNormalThreshold="320, 320">
+                            <telerik:RadFluidContentControl.SmallContent>
+                                <Grid>
+                                    <Image Source="{Binding SmallFlag}" Stretch="None"
+											MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                                </Grid>
+                            </telerik:RadFluidContentControl.SmallContent>
+                            <telerik:RadFluidContentControl.Content>
+                                <Grid>
+                                    <Image Source="{Binding SmallFlag}" Stretch="None"
+											MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                                </Grid>
+                            </telerik:RadFluidContentControl.Content>
+                            <telerik:RadFluidContentControl.LargeContent>
+                                <Grid>
+                                    <Image Margin="5" />
+                                    <Image Source="{Binding LargeFlag}" HorizontalAlignment="Right"
+											VerticalAlignment="Top" Width="245" Height="150"
+											Margin="40" />
+                                    <StackPanel Margin="40" HorizontalAlignment="Left"
+											VerticalAlignment="Top">
+                                        <TextBlock Text="Political System:" FontWeight="Bold"
+												FontSize="12" FontFamily="Verdana" />
+                                        <TextBlock Text="{Binding PoliticalSystem}" FontSize="12"
+												FontFamily="Verdana" />
+                                        <StackPanel Orientation="Horizontal" Margin="0 14">
+                                            <TextBlock Text="Capital City:" FontWeight="Bold"
+													FontSize="12" FontFamily="Verdana" />
+                                            <TextBlock Text="{Binding CapitalCity}" FontSize="12"
+													FontFamily="Verdana" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Total Area:" FontWeight="Bold"
+													FontSize="12" FontFamily="Verdana" />
+                                            <TextBlock Text="{Binding TotalArea}" FontSize="12"
+													FontFamily="Verdana" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0 14">
+                                            <TextBlock Text="Population:" FontWeight="Bold"
+													FontSize="12" FontFamily="Verdana" />
+                                            <TextBlock Text="{Binding Population}" FontSize="12"
+													FontFamily="Verdana" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Currency:" FontWeight="Bold"
+													FontSize="12" FontFamily="Verdana" />
+                                            <TextBlock Text="{Binding Currency}" FontSize="12"
+													FontFamily="Verdana" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0 14">
+                                            <TextBlock Text="Official Language:" FontWeight="Bold"
+													FontSize="12" FontFamily="Verdana" />
+                                            <TextBlock Text="{Binding OfficialLanguage}"
+													FontSize="12" FontFamily="Verdana" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <Grid Height="160" Margin="30 20 20 20"
+											VerticalAlignment="Bottom">
+                                        <TextBlock FontSize="11" TextWrapping="Wrap"
+												Text="{Binding Description}" />
+                                    </Grid>
+                                </Grid>
+                            </telerik:RadFluidContentControl.LargeContent>
+                        </telerik:RadFluidContentControl>
+                    </Grid>
+                </DataTemplate>
+            </telerik:RadTileView.ContentTemplate>
+            <telerik:RadTileViewItem />
+            <telerik:RadTileViewItem />
+            <telerik:RadTileViewItem />
+        </telerik:RadTileView>
+    </Grid>
+</Window>
